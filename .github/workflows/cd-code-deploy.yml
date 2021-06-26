@@ -28,13 +28,6 @@ jobs:
         run: |
           aws ecs describe-task-definition --task-definition net-api --query taskDefinition > task-definition.json
 
-      - name: Get task version
-        run: |
-          echo 'TASK_DEFINITON<<EOF' >> $GITHUB_ENV
-          cat task-definition.json | grep taskDefinitionArn | awk -F '\"' '{print $4}' >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-          echo ${{ env.TASK_DEFINITON }}
-
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
