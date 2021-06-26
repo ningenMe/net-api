@@ -28,6 +28,13 @@ jobs:
         run: |
           aws ecs describe-task-definition --task-definition net-api --query taskDefinition > task-definition.json
 
+      - name: Get task version
+        run: |
+          echo 'TASK_DEFINITON<<EOF' >> $GITHUB_ENV
+          cat task-definition.json | grep taskDefinitionArn | awk -F '\"' '{print $4}' >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+          echo ${{ env.TASK_DEFINITON }}
+
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
@@ -35,3 +42,6 @@ jobs:
           service: net-api-ecs-service
           cluster: ningenme-cluster
           wait-for-service-stability: true
+          codedeploy-appspec: appspec.json
+          codedeploy-application: net-api-codedeploy-app
+          codedeploy-deployment-group: net-api-deployment-group
