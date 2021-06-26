@@ -42,6 +42,6 @@ jobs:
           service: net-api-ecs-service
           cluster: ningenme-cluster
           wait-for-service-stability: true
-          codedeploy-appspec: appspec.json
+          codedeploy-appspec: appspec.yaml
           codedeploy-application: net-api-codedeploy-app
           codedeploy-deployment-group: net-api-deployment-group
