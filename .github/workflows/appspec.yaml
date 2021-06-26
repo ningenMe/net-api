@@ -6,4 +6,4 @@ Resources:
         TaskDefinition: "TASK_DEFINITION"
         LoadBalancerInfo:
           ContainerName: "net-api-container"
-          ContainerPort: 80
+          ContainerPort: 8080
