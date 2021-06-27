@@ -1,7 +1,7 @@
 package ningenme.net.api.domain.serviceImpl;
 
 import lombok.RequiredArgsConstructor;
-import ningenme.net.api.domain.object.ApplicationMeta;
+import ningenme.net.api.domain.entity.ApplicationMeta;
 import ningenme.net.api.domain.repository.mysql.ApplicationMetaRepository;
 import ningenme.net.api.domain.service.ApplicationMetaService;
 import ningenme.net.api.domain.value.ApplicationMetaId;
