@@ -1,4 +1,4 @@
-package ningenme.net.api.application.controller.ApplicationMetaLatestGet;
+package ningenme.net.api.application.controller.applicationMetaLatestGet;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -26,7 +26,7 @@ public class ApplicationMetaLatestGetController {
           @PathVariable("applicationMetaId") String applicationMetaId) {
     return ResponseEntity
             .ok(
-                    applicationMetaService.getApplicationMeta(ApplicationMetaId.of(applicationMetaId))
+                    applicationMetaService.getLatestOne(ApplicationMetaId.of(applicationMetaId))
                                           .getApplicationMetaLatestGetResponse()
                );
   }

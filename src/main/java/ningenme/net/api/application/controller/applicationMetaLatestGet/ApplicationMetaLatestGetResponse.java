@@ -1,4 +1,4 @@
-package ningenme.net.api.application.controller.ApplicationMetaLatestGet;
+package ningenme.net.api.application.controller.applicationMetaLatestGet;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

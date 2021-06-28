@@ -1,9 +1,9 @@
-package ningenme.net.api.domain.object;
+package ningenme.net.api.domain.entity;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import ningenme.net.api.application.controller.ApplicationMetaLatestGet.ApplicationMetaLatestGetResponse;
+import ningenme.net.api.application.controller.applicationMetaLatestGet.ApplicationMetaLatestGetResponse;
 import ningenme.net.api.domain.value.ApplicationMetaId;
 import ningenme.net.api.domain.value.CreatedTime;
 import ningenme.net.api.infrastructure.mysql.dto.ApplicationMetaDto;
