@@ -14,3 +14,6 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+net:
+  api:
+    encrypt-secret: ${ENCRYPT_SECRET:hoge} # TODO ちゃんとした値を入れる
