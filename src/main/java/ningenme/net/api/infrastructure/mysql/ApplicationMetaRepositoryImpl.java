@@ -19,4 +19,9 @@ public class ApplicationMetaRepositoryImpl implements ApplicationMetaRepository 
     return ApplicationMeta.of(
             applicationMetaMapper.selectLatestOne(applicationMetaId.getValue()));
   }
+
+  @Override
+  public void post(@NonNull final ApplicationMetaId applicationMetaId) {
+    applicationMetaMapper.insert(applicationMetaId.getValue());
+  }
 }
