@@ -5,5 +5,5 @@ import ningenme.net.api.domain.entity.ApplicationMeta;
 import ningenme.net.api.domain.value.ApplicationMetaId;
 
 public interface ApplicationMetaRepository {
-  ApplicationMeta getApplicationMeta(@NonNull final ApplicationMetaId applicationMetaId);
+  ApplicationMeta getLatestOne(@NonNull final ApplicationMetaId applicationMetaId);
 }

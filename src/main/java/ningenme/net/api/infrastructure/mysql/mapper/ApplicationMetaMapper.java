@@ -11,5 +11,5 @@ public interface ApplicationMetaMapper {
   @Select(
           "SELECT application_meta_id, created_time FROM application_metas ORDER BY created_time DESC LIMIT 1"
   )
-  ApplicationMetaDto selectApplicationMetaDto(@Param("applicationMetaId") String applicationMetaId);
+  ApplicationMetaDto selectLatestOne(@Param("applicationMetaId") String applicationMetaId);
 }

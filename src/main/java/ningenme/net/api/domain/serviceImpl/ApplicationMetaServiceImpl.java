@@ -13,7 +13,7 @@ public class ApplicationMetaServiceImpl implements ApplicationMetaService {
 
   private final ApplicationMetaRepository applicationMetaRepository;
   @Override
-  public ApplicationMeta getApplicationMeta(ApplicationMetaId applicationMetaId) {
-    return applicationMetaRepository.getApplicationMeta(applicationMetaId);
+  public ApplicationMeta getLatestOne(ApplicationMetaId applicationMetaId) {
+    return applicationMetaRepository.getLatestOne(applicationMetaId);
   }
 }
