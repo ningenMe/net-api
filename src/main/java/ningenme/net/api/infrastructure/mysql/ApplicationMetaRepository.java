@@ -7,11 +7,18 @@ import ningenme.net.api.domain.value.ApplicationMetaId;
 import ningenme.net.api.infrastructure.mysql.mapper.ApplicationMetaMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Repository
 public class ApplicationMetaRepository {
 
   private final ApplicationMetaMapper applicationMetaMapper;
+
+  public List<ApplicationMeta> get(@NonNull final ApplicationMetaId applicationMetaId) {
+    return ApplicationMeta.of(
+            applicationMetaMapper.select(applicationMetaId.getValue()));
+  }
 
   public ApplicationMeta getLatestOne(@NonNull final ApplicationMetaId applicationMetaId) {
     return ApplicationMeta.of(
