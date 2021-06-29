@@ -26,8 +26,8 @@ public class ApplicationMetaLatestGetController {
           @PathVariable("applicationMetaId") String applicationMetaId) {
     return ResponseEntity
             .ok(
-                    applicationMetaService.getLatestOne(ApplicationMetaId.of(applicationMetaId))
-                                          .getApplicationMetaLatestGetResponse()
+                    ApplicationMetaLatestGetResponse.of(
+                            applicationMetaService.getLatestOne(ApplicationMetaId.of(applicationMetaId)))
                );
   }
 
