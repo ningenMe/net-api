@@ -46,11 +46,11 @@ public class NetApiAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     String user = Jwts.parserBuilder()
-            .setSigningKey(secret.getBytes())
-            .build()
-            .parseClaimsJws(token.replace(AUTH_PREFIX,""))
-            .getBody()
-            .getSubject();
+                      .setSigningKey(secret.getBytes())
+                      .build()
+                      .parseClaimsJws(token.replace(AUTH_PREFIX,""))
+                      .getBody()
+                      .getSubject();
 
     if(Objects.isNull(user)) {
       return null;

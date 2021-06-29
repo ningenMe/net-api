@@ -54,7 +54,7 @@ public class NetApiAuthenticationFilter extends UsernamePasswordAuthenticationFi
                       httpServletRequest.getParameter(USERNAME_PARAMETER),
                       httpServletRequest.getParameter(PASSWORD_PARAMETER),
                       new ArrayList<>())
-      );
+                                               );
     } catch (Exception ex) {
       throw ex;
     }
@@ -67,10 +67,10 @@ public class NetApiAuthenticationFilter extends UsernamePasswordAuthenticationFi
     Date expiresAt = new Date(issuedAt.getTime() + EXPIRATION_TIME);
     SecretKey secretKey = new SecretKeySpec(secret.getBytes(),"HmacSHA256");
     String token = Jwts.builder()
-            .setSubject(loginUser.getUsername())
-            .setExpiration(expiresAt)
-            .signWith(secretKey)
-            .compact();
+                       .setSubject(loginUser.getUsername())
+                       .setExpiration(expiresAt)
+                       .signWith(secretKey)
+                       .compact();
     httpServletResponse.addHeader(ACCESS_CONTROL_EXPOSE_HEADER,AUTH_HEADER);
     httpServletResponse.addHeader(ACCESS_CONTROL_EXPOSE_HEADER,AWS_AUTH_HEADER);
     httpServletResponse.addHeader(AUTH_HEADER, AUTH_PREFIX + token);

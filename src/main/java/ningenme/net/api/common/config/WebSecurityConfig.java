@@ -19,32 +19,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      http
-              .authorizeRequests()
-              .mvcMatchers(HttpMethod.GET ,"/v1/**").permitAll()
-              .mvcMatchers("/v1/login").permitAll()
-//              .anyRequest().authenticated()
+        http
+                .authorizeRequests()
+                .mvcMatchers(HttpMethod.GET , "/v1/**").permitAll()
+                .mvcMatchers("/v1/login").permitAll()
+                .anyRequest().authenticated()
 
-              .and()
-              .formLogin()
+                .and()
+                .formLogin()
 
-              .and()
-              .logout()
+                .and()
+                .logout()
 
-              .and()
-              .addFilter(new NetApiAuthenticationFilter(authenticationManager(), secret))
-              .addFilter(new NetApiAuthorizationFilter(authenticationManager(), secret))
+                .and()
+                .addFilter(new NetApiAuthenticationFilter(authenticationManager(),secret))
+                .addFilter(new NetApiAuthorizationFilter(authenticationManager(),secret))
 
-              .csrf()
-              .disable()
+                .csrf()
+                .disable()
 
-              .headers()
-              .cacheControl()
-              .disable()
+                .headers()
+                .cacheControl()
+                .disable()
 
-              .and()
-              .cors()
-              .configurationSource(getConfigurationSource());
+                .and()
+                .cors()
+                .configurationSource(getConfigurationSource());
     }
 
     private CorsConfigurationSource getConfigurationSource() {
