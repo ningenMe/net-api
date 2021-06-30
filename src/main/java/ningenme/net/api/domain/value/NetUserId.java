@@ -15,7 +15,7 @@ public class NetUserId {
   private final String value;
   public static NetUserId of(@NonNull final String value) {
     if (!REGEX_PATTERN.matcher(value).matches()) {
-      throw new IllegalArgumentException("invalid netUserId");
+      throw new IllegalArgumentException(value + " is invalid netUserId");
     }
     return new NetUserId(value);
   }
