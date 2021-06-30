@@ -1,5 +1,6 @@
 package ningenme.net.api.common.config;
 
+import ningenme.net.api.common.filter.LoggingFilter;
 import ningenme.net.api.common.filter.NetApiAuthenticationFilter;
 import ningenme.net.api.common.filter.NetApiAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,13 +17,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${net.api.encrypt-secret}")
     private String secret;
+    @Value("${net.api.domain}")
+    private String domain;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .mvcMatchers(HttpMethod.GET , "/v1/**").permitAll()
-                .mvcMatchers("/v1/login").permitAll()
+                .mvcMatchers(HttpMethod.POST ,"/v1/login").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
@@ -32,7 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
 
                 .and()
-                .addFilter(new NetApiAuthenticationFilter(authenticationManager(),secret))
+                .addFilterBefore(new LoggingFilter(),NetApiAuthenticationFilter.class)
+                .addFilter(new NetApiAuthenticationFilter(authenticationManager(),secret,domain))
                 .addFilter(new NetApiAuthorizationFilter(authenticationManager(),secret))
 
                 .csrf()
@@ -56,17 +60,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/v1/**", corsConfiguration);
         return urlBasedCorsConfigurationSource;
     }
-
-
-//    private static final String[] AUTH_WHITELIST = {
-//        "/swagger-resources/**",
-//        "/swagger-ui.html",
-//        "/v2/api-docs",
-//        "/webjars/**"
-//    };
-//
-//    @Override
-//    public void configure(WebSecurity web) {
-//        web.ignoring().antMatchers(AUTH_WHITELIST);
-//    }
 }

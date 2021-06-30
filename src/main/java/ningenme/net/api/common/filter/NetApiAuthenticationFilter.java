@@ -2,6 +2,7 @@ package ningenme.net.api.common.filter;
 
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
+import ningenme.net.api.common.config.NetApiAuthConfig;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +16,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,24 +28,18 @@ public class NetApiAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
   private AuthenticationManager authenticationManager;
 
-  private static final String AUTH_HEADER = "Authorization";
-  private static final String AWS_AUTH_HEADER = "x-amzn-remapped-authorization";
-  private static final String AUTH_PREFIX = "Bearer ";
-  private static final Long EXPIRATION_TIME = 1000L * 60L * 60L * 12L; // 12 hour (ms)
-  private static final String LOGIN_PATH = "/v1/login";
-  private static final String USERNAME_PARAMETER = "email";
-  private static final String PASSWORD_PARAMETER = "password";
-  private static final String ACCESS_CONTROL_EXPOSE_HEADER = "Access-Control-Expose-Headers";
   private final String secret;
+  private final String domain;
 
-  public NetApiAuthenticationFilter(AuthenticationManager authenticationManager, String secret) {
+  public NetApiAuthenticationFilter(AuthenticationManager authenticationManager, String secret, String domain) {
 
     this.secret = secret;
+    this.domain = domain;
     this.authenticationManager = authenticationManager;
 
-    setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher(LOGIN_PATH, HttpMethod.POST.name()));
-    setUsernameParameter(USERNAME_PARAMETER);
-    setPasswordParameter(PASSWORD_PARAMETER);
+    setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher(NetApiAuthConfig.LOGIN_PATH, HttpMethod.POST.name()));
+    setUsernameParameter(NetApiAuthConfig.USERNAME_PARAMETER);
+    setPasswordParameter(NetApiAuthConfig.PASSWORD_PARAMETER);
   }
 
   @Override
@@ -51,8 +47,8 @@ public class NetApiAuthenticationFilter extends UsernamePasswordAuthenticationFi
     try {
       return authenticationManager.authenticate(
               new UsernamePasswordAuthenticationToken(
-                      httpServletRequest.getParameter(USERNAME_PARAMETER),
-                      httpServletRequest.getParameter(PASSWORD_PARAMETER),
+                      httpServletRequest.getParameter(NetApiAuthConfig.USERNAME_PARAMETER),
+                      httpServletRequest.getParameter(NetApiAuthConfig.PASSWORD_PARAMETER),
                       new ArrayList<>())
                                                );
     } catch (Exception ex) {
@@ -64,15 +60,21 @@ public class NetApiAuthenticationFilter extends UsernamePasswordAuthenticationFi
   protected void successfulAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain, Authentication authentication) throws IOException, ServletException {
     User loginUser = (User)authentication.getPrincipal();
     Date issuedAt = new Date();
-    Date expiresAt = new Date(issuedAt.getTime() + EXPIRATION_TIME);
+    Date expiresAt = new Date(issuedAt.getTime() + NetApiAuthConfig.EXPIRATION_TIME);
     SecretKey secretKey = new SecretKeySpec(secret.getBytes(),"HmacSHA256");
     String token = Jwts.builder()
                        .setSubject(loginUser.getUsername())
                        .setExpiration(expiresAt)
                        .signWith(secretKey)
                        .compact();
-    httpServletResponse.addHeader(ACCESS_CONTROL_EXPOSE_HEADER,AUTH_HEADER);
-    httpServletResponse.addHeader(ACCESS_CONTROL_EXPOSE_HEADER,AWS_AUTH_HEADER);
-    httpServletResponse.addHeader(AUTH_HEADER, AUTH_PREFIX + token);
+    httpServletResponse.addCookie(getCookie(token));
+  }
+
+  private Cookie getCookie(final String token) {
+    Cookie cookie = new Cookie(NetApiAuthConfig.COOKIE_NAME, token);
+    cookie.setHttpOnly(true);
+    cookie.setSecure(true);
+    cookie.setDomain(domain);
+    return cookie;
   }
 }
