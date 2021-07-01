@@ -56,5 +56,6 @@ jobs:
           distribution: 'adopt'
       - name: application-meta push
         run: |
-          curl -X POST -H "Content-Type: application/json" https://api.ningenme.net/v1/application-metas/net-api
+          token=`curl -X POST -d email=test -d password=Password0 https://api.ningenme.net/v1/login -i | grep MeCookie | awk -F '=|;' '{print $2}'`
+          curl -X POST -b "MeCookie=${token}" -H "Content-Type: application/json" https://api.ningenme.net/v1/application-metas/net-api
 
