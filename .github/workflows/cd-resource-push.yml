@@ -43,6 +43,10 @@ jobs:
 
   application-meta-push:
     runs-on: ubuntu-latest
+    env:
+      NET_API_USERNAME: ${{ secrets.NET_API_USERNAME }}
+      NET_API_PASSWORD: ${{ secrets.NET_API_PASSWORD }}
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11

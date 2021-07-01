@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -25,9 +26,10 @@ public class LoggingFilter implements Filter {
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-    log.info(getRequestInfo((HttpServletRequest) request));
+    final UUID uuid = UUID.randomUUID();
+    log.info(getRequestInfo((HttpServletRequest) request,uuid));
     chain.doFilter(request,response);
-    log.info(getResponseInfo((HttpServletResponse) response));
+    log.info(getResponseInfo((HttpServletResponse) response,uuid));
   }
 
   @Override
@@ -35,8 +37,13 @@ public class LoggingFilter implements Filter {
 
   }
 
-  private String getRequestInfo(HttpServletRequest request) throws IOException{
-    String info = "request";
+  private String getRequestInfo(final HttpServletRequest request,final UUID uuid) throws IOException{
+    String info = "";
+    {
+      info += "request :";
+      info += uuid.toString();
+      info += ", ";
+    }
     {
       info += " method: ";
       info += request.getMethod();
@@ -64,11 +71,21 @@ public class LoggingFilter implements Filter {
     return info;
   }
 
-  private String getResponseInfo(HttpServletResponse response) {
-    String info = "response";
+  private String getResponseInfo(final HttpServletResponse response,final UUID uuid) {
+    String info = "";
+    {
+      info += "response:";
+      info += uuid.toString();
+      info += ", ";
+    }
     {
       info += " status: ";
       info += response.getStatus();
+      info += ", ";
+    }
+    {
+      info += " headers: ";
+      info += response.getHeaderNames();
       info += ", ";
     }
     return info;
