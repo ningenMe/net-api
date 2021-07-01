@@ -27,14 +27,19 @@ public class LoggingFilter implements Filter {
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     final UUID uuid = UUID.randomUUID();
-    log.info(getRequestInfo((HttpServletRequest) request,uuid));
+    Boolean isNotLogging = isHealthCheckRequest((HttpServletRequest) request);
+    if(!isNotLogging) log.info(getRequestInfo((HttpServletRequest) request,uuid));
     chain.doFilter(request,response);
-    log.info(getResponseInfo((HttpServletResponse) response,uuid));
+    if(!isNotLogging) log.info(getResponseInfo((HttpServletResponse) response,uuid));
   }
 
   @Override
   public void destroy() {
 
+  }
+
+  private Boolean isHealthCheckRequest(final HttpServletRequest request) {
+    return request.getRequestURI().startsWith("/v1/healthcheck");
   }
 
   private String getRequestInfo(final HttpServletRequest request,final UUID uuid) throws IOException{
