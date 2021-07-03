@@ -58,20 +58,23 @@ public class JwtCookieService {
           return cookie.getValue();
         }
       }
-    } catch (Exception ex) {
-      throw new RuntimeException(ex);
+    } catch (Exception ignored) {
     }
-    throw new RuntimeException();
+    return null;
   }
 
-  public NetUserId getNetUserIdByJwtToken(@NonNull final String jwtToken) {
-    final String userId = Jwts.parserBuilder()
-        .setSigningKey(netApiSecurityConfig.getSecret().getBytes())
-        .build()
-        .parseClaimsJws(jwtToken)
-        .getBody()
-        .getSubject();
-    return NetUserId.of(userId);
+  public NetUserId getNetUserIdByJwtToken(final String jwtToken) {
+    try {
+      final String userId = Jwts.parserBuilder()
+                                .setSigningKey(netApiSecurityConfig.getSecret().getBytes())
+                                .build()
+                                .parseClaimsJws(jwtToken)
+                                .getBody()
+                                .getSubject();
+      return NetUserId.of(userId);
+    } catch (Exception ex) {
+      return null;
+    }
   }
 
 }

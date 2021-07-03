@@ -15,6 +15,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -26,8 +27,19 @@ public class NetApiAuthorizationFilter extends GenericFilterBean {
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     final String jwtToken = jwtCookieService.getJwtTokenByRequest((HttpServletRequest) request);
+
     final NetUserId netUserId = jwtCookieService.getNetUserIdByJwtToken(jwtToken);
+    if(Objects.isNull(netUserId)) {
+      chain.doFilter(request,response);
+      return;
+    }
+
     final NetUser netUser = netUserService.getNetUser(netUserId);
+    if(Objects.isNull(netUser)) {
+      chain.doFilter(request,response);
+      return;
+    }
+
     SecurityContextHolder.getContext().setAuthentication(netUser.getUsernamePasswordAuthenticationToken());
     chain.doFilter(request, response);
   }

@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import ningenme.net.api.common.filter.LoggingFilter;
 import ningenme.net.api.common.filter.NetApiAuthorizationFilter;
 import ningenme.net.api.common.handler.CookieAuthenticationSuccessHandler;
+import ningenme.net.api.domain.value.NetUserRole;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,8 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                .mvcMatchers(HttpMethod.GET , "/v1/**").permitAll()
-//                .mvcMatchers(HttpMethod.POST,"/v1/application-metas/**").hasAuthority(NetUserRole.ADMIN.getValue())
+                .mvcMatchers(HttpMethod.GET , "/v1/**").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/v1/net/users").hasAuthority(NetUserRole.ADMIN.getValue())
+                .mvcMatchers(HttpMethod.POST, "/v1/application-metas/**").hasAuthority(NetUserRole.ADMIN.getValue())
                 .anyRequest().authenticated()
 
                 //login

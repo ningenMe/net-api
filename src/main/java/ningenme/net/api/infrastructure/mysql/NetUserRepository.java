@@ -16,10 +16,17 @@ public class NetUserRepository {
   private final NetUserMapper netUserMapper;
 
   public void post(@NonNull NetUser netUser) {
-    netUserMapper.insert(netUser.getNetUserId().getValue(),netUser.getEncryptedPassword().getValue());
+    netUserMapper.insert(netUser.getNetUserId().getValue(),
+                         netUser.getEncryptedPassword().getValue(),
+                         netUser.getNetUserRole().getValue()
+                        );
   }
 
   public NetUser get(@NonNull final NetUserId netUserId) {
-    return NetUser.of(netUserMapper.select(netUserId.getValue()));
+    try {
+      return NetUser.of(netUserMapper.select(netUserId.getValue()));
+    } catch (Exception ex) {
+      return null;
+    }
   }
 }
