@@ -40,6 +40,7 @@ jobs:
           codedeploy-deployment-group: net-api-deployment-group
 
   application-meta-push:
+    needs: deploy
     runs-on: ubuntu-latest
     env:
       NET_API_USERNAME: ${{ secrets.NET_API_USERNAME }}
