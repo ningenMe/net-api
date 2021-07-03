@@ -31,4 +31,8 @@ public class NetUserService implements UserDetailsService {
     }
     return netUser.getUser();
   }
+
+  public NetUser getNetUser(@NonNull final NetUserId netUserId) {
+    return netUserRepository.get(netUserId);
+  }
 }

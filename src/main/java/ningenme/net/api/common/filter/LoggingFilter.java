@@ -1,6 +1,7 @@
 package ningenme.net.api.common.filter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -18,6 +19,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
+@Component
 public class LoggingFilter implements Filter {
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {

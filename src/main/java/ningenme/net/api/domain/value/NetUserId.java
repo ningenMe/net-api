@@ -4,6 +4,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.regex.Pattern;
 
@@ -18,5 +20,10 @@ public class NetUserId {
       throw new IllegalArgumentException(value + " is invalid netUserId");
     }
     return new NetUserId(value);
+  }
+
+  public static NetUserId of(@NonNull final Authentication authentication) {
+    final String value = ((User) authentication.getPrincipal()).getUsername();
+    return NetUserId.of(value);
   }
 }

@@ -8,6 +8,7 @@ CREATE TABLE `application_metas` (
 CREATE TABLE `net_users` (
   `net_user_id` varchar(255) NOT NULL,
   `password`    varchar(255) NOT NULL,
+  `role`        varchar(255) NOT NULL,
   `deleted_time` timestamp NULL DEFAULT NULL,
   `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
