@@ -18,7 +18,7 @@ public interface NetUserMapper {
           @Param("password") @NonNull final String password);
 
   @Select(
-          "SELECT net_user_id, password FROM net_users WHERE net_user_id = #{netUserId}"
+          "SELECT net_user_id, password, role FROM net_users WHERE net_user_id = #{netUserId}"
   )
   NetUserDto select(
           @Param("netUserId") @NonNull final String netUserId);

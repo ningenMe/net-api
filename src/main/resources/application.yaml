@@ -16,5 +16,8 @@ mybatis:
     map-underscore-to-camel-case: true
 net:
   api:
-    domain: ${DOMAIN:ningenme.net}
-    encrypt-secret: ${ENCRYPT_SECRET:mYq3t6w9z$C&F)J@NcQfTjWnZr4u7x!A} # TODO ちゃんとした値を入れる
+    common:
+      domain: ${DOMAIN:ningenme.net}
+    security:
+      encrypt-secret: ${ENCRYPT_SECRET:mYq3t6w9z$C&F)J@NcQfTjWnZr4u7x!A}
+      encrypt-algorithm: ${ENCRYPT_ALGORITHM}
