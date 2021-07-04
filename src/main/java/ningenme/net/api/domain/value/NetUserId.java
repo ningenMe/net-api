@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class NetUserId {
-  private static final Pattern REGEX_PATTERN = Pattern.compile("^[a-z0-9_]{1,100}$");
+  private static final Pattern REGEX_PATTERN = Pattern.compile("^[a-z0-9_]{3,20}$");
 
   private final String value;
   public static NetUserId of(@NonNull final String value) {
