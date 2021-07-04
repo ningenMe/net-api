@@ -12,12 +12,12 @@ import java.util.List;
 public interface ApplicationMetaMapper {
 
   @Select(
-          "SELECT application_meta_id, created_time FROM application_metas ORDER BY created_time DESC LIMIT 1"
+          "SELECT application_meta_id, created_time FROM application_metas WHERE application_meta_id = #{applicationMetaId} ORDER BY created_time DESC LIMIT 1"
   )
   ApplicationMetaDto selectLatestOne(@Param("applicationMetaId") String applicationMetaId);
 
   @Select(
-          "SELECT application_meta_id, created_time FROM application_metas ORDER BY created_time ASC"
+          "SELECT application_meta_id, created_time FROM application_metas WHERE application_meta_id = #{applicationMetaId} ORDER BY created_time ASC"
   )
   List<ApplicationMetaDto> select(@Param("applicationMetaId") String applicationMetaId);
 
