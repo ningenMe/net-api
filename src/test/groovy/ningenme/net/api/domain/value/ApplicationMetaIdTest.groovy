@@ -15,8 +15,9 @@ class ApplicationMetaIdTest extends Specification {
     assert actual.getValue() == target
 
     where:
-    target    || expect
-    "net-api" || ApplicationMetaId.NET_API
+    target      || expect
+    "net-api"   || ApplicationMetaId.NET_API
+    "net-front" || ApplicationMetaId.NET_FRONT
   }
 
   @Unroll
