@@ -24,7 +24,7 @@
 |ci/cd       | github actions, aws codedeploy |  
 |application | Spring Boot                    |  
 
-## version
+## history
 
 |version  |repository                                                       |tech stack|  
 |------   |---------                                                        |----------- |  
