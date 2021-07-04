@@ -74,7 +74,7 @@ jobs:
       - name: test-sync
         run: |
           aws s3 sync ./build/reports/tests/test ${{ env.AWS_S3_BUCKET }}/net-api/test --delete
-      - name: test-sync
+      - name: jacoco-sync
         run: |
           aws s3 sync ./build/reports/jacoco/test/html ${{ env.AWS_S3_BUCKET }}/net-api/jacoco --delete
 
