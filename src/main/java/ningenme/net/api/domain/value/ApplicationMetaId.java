@@ -10,7 +10,9 @@ import java.util.Objects;
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum ApplicationMetaId {
-  NET_API("net-api");
+  NET_API("net-api"),
+  NET_FRONT("net-front"),
+  ;
   @NonNull
   private final String value;
 
