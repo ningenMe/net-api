@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'jacoco'
 }
 
 group = 'ningenme.net'
@@ -57,4 +58,23 @@ test {
 	useJUnitPlatform()
 	dependsOn(dockerComposeUp)
 	finalizedBy(dockerComposeDown)
+	finalizedBy(jacocoTestReport)
+}
+
+jacoco {
+	toolVersion = "0.8.4"
+	reportsDir  = file("$buildDir/reports/jacoco")
+}
+
+jacocoTestReport {
+	reports {
+		html.enabled = true
+	}
+	afterEvaluate {
+		getClassDirectories().setFrom(classDirectories.files.collect {
+			fileTree(
+					dir: it,
+					exclude: ['**/*Application**'])
+		})
+	}
 }

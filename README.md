@@ -9,11 +9,15 @@
 [api.ningenme.net](https://api.ningenme.net)
 
 ## document
-- [swagger](https://static.ningenme.net/net-api/swagger)
-- [javadoc](https://static.ningenme.net/net-api/javadoc)
+|            |url                             |  
+|----------- |------------------------------- |  
+|swagger     |https://static.ningenme.net/net-api/swagger |
+|javadoc     |https://static.ningenme.net/net-api/javadoc |  
+|test        |https://static.ningenme.net/net-api/test |  
+|jacoco      |https://static.ningenme.net/net-api/jacoco |  
 
 ## architecture
-|            |                                |  
+|            |      architecuture             |  
 |----------- |------------------------------- |  
 |routing     |cloudfront + auto load balancer |
 |hosting     | ecs                            |  

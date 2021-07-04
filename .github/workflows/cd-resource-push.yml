@@ -41,27 +41,7 @@ jobs:
           aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.AWS_ECR_REGISTORY }}
           docker push ${{ env.AWS_ECR_REGISTORY }}/${{ env.AWS_ECR_REPOSITORY }}:latest
 
-  swagger-push:
-    runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-      AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: aws-credential-setup
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-      - name: sync
-        run: |
-          aws s3 sync ./swagger ${{ env.AWS_S3_BUCKET }}/net-api/swagger --delete
-
-  javadoc-push:
+  static-push:
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -75,15 +55,27 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: jar build
+      - name: generate javadoc
         run: gradle javadoc
+      - name: test
+        run: gradle test
       - name: aws-credential-setup
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-      - name: sync
+      - name: swagger-sync
+        run: |
+          aws s3 sync ./swagger ${{ env.AWS_S3_BUCKET }}/net-api/swagger --delete
+      - name: javadoc-sync
         run: |
           aws s3 sync ./build/docs/javadoc ${{ env.AWS_S3_BUCKET }}/net-api/javadoc --delete
+      - name: test-sync
+        run: |
+          aws s3 sync ./build/reports/tests/test ${{ env.AWS_S3_BUCKET }}/net-api/test --delete
+      - name: test-sync
+        run: |
+          aws s3 sync ./build/reports/jacoco/test/html ${{ env.AWS_S3_BUCKET }}/net-api/jacoco --delete
+
 
