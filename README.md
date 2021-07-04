@@ -9,7 +9,8 @@
 [api.ningenme.net](https://api.ningenme.net)
 
 ## document
-- TODO
+- [swagger](https://static.ningenme.net/net-api/swagger)
+- [javadoc](https://static.ningenme.net/net-api/javadoc)
 
 ## architecture
 |            |                                |  
