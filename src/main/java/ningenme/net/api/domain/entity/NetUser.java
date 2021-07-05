@@ -39,7 +39,7 @@ public class NetUser {
             .builder()
             .netUserId(NetUserId.of(netUserDto.getNetUserId()))
             .netUserRole(NetUserRole.of(netUserDto.getRole()))
-            .encryptedPassword(EncryptedPassword.of(RawPassword.of(netUserDto.getPassword())))
+            .encryptedPassword(EncryptedPassword.of(netUserDto.getPassword()))
             .build();
   }
 

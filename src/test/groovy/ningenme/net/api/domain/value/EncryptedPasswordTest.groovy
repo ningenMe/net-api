@@ -15,18 +15,22 @@ class EncryptedPasswordTest extends Specification {
         where:
         target                     || _
         RawPassword.of("aA0aA0aA") || _
+        "hoge"                     || _
     }
 
     @Unroll
-    def "[異常系] of value=#target EncryptedPasswordを返す"() {
+    def "[異常系] of string EncryptedPasswordを返す"() {
         when:
-        EncryptedPassword.of(target)
+        EncryptedPassword.of((String)null)
         then:
         thrown(NullPointerException)
-
-        where:
-        target || _
-        null   || _
+    }
+    @Unroll
+    def "[異常系] of RawPassword EncryptedPasswordを返す"() {
+        when:
+        EncryptedPassword.of((RawPassword)null)
+        then:
+        thrown(NullPointerException)
     }
 
 }
