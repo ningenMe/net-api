@@ -43,12 +43,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .addFilterBefore(loggingFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(netApiAuthorizationFilter,UsernamePasswordAuthenticationFilter.class)
 
                 .sessionManagement()
                 .disable()
-
-
-                .addFilterBefore(netApiAuthorizationFilter,UsernamePasswordAuthenticationFilter.class)
 
                 .csrf()
                 .disable()

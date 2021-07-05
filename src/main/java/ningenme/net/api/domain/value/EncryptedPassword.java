@@ -19,4 +19,7 @@ public class EncryptedPassword {
   public static EncryptedPassword of(@NonNull final RawPassword rawPassword) {
     return new EncryptedPassword(passwordEncoder.encode(rawPassword.getValue()));
   }
+  public static EncryptedPassword of(@NonNull final String password) {
+    return new EncryptedPassword(password);
+  }
 }

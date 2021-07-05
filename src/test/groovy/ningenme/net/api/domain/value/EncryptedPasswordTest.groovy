@@ -15,6 +15,7 @@ class EncryptedPasswordTest extends Specification {
         where:
         target                     || _
         RawPassword.of("aA0aA0aA") || _
+        "hoge"                     || _
     }
 
     @Unroll
