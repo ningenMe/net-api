@@ -14,3 +14,10 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+net:
+  api:
+    common:
+      domain: ningenme.net
+    security:
+      encrypt-secret: mYq3t6w9z$C&F)J@NcQfTjWnZr4u7x!A
+      encrypt-algorithm: HmacSHA256
