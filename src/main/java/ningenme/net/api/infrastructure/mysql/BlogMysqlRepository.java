@@ -25,11 +25,10 @@ public class BlogMysqlRepository {
   }
 
   public List<Blog> get(@NonNull final List<BlogType> blogTypeList) {
-    log.info(blogTypeList.toString());
     if(CollectionUtils.isEmpty(blogTypeList)) {
       log.info("blogTypeList is empty");
       return List.of();
     }
-    return Blog.of(blogMysqlMapper.select(BlogType.of(blogTypeList)));
+    return Blog.fromBlogDtoList(blogMysqlMapper.select(BlogType.of(blogTypeList)));
   }
 }

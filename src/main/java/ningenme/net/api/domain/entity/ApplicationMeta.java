@@ -25,7 +25,7 @@ public class ApplicationMeta {
                           .build();
   }
 
-  public static List<ApplicationMeta> of(@NonNull final List<ApplicationMetaDto> applicationMetaDtoList) {
+  public static List<ApplicationMeta> fromApplicationMetaDtoList(@NonNull final List<ApplicationMetaDto> applicationMetaDtoList) {
     return applicationMetaDtoList.stream()
                                  .map(ApplicationMeta::of)
                                  .collect(Collectors.toList());
