@@ -11,7 +11,7 @@ public class BatchBlogKicker {
 
   private final BlogService blogService;
 
-  @Scheduled(cron = "0 */5 * * * *", zone = "Asia/Tokyo")
+  @Scheduled(cron = "0 0 0 1,15 * *", zone = "Asia/Tokyo")
   void kickBatchBlog() {
     blogService.processBlog();
   }
