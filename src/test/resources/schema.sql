@@ -14,3 +14,14 @@ CREATE TABLE `net_users` (
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`net_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `blogs` (
+  `url`   varchar(255) NOT NULL,
+  `date`  varchar(255) NOT NULL,
+  `type`  varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `deleted_time` timestamp NULL DEFAULT NULL,
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`url`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
-public interface NetUserMapper {
+public interface NetUserMysqlMapper {
 
   @Insert(
           "INSERT INTO net_users (net_user_id,password,role) VALUES (#{netUserId}, #{password}, #{role})"

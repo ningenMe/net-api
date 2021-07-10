@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public interface ApplicationMetaMapper {
+public interface ApplicationMetaMysqlMapper {
 
   @Select(
           "SELECT application_meta_id, created_time FROM application_metas WHERE application_meta_id = #{applicationMetaId} ORDER BY created_time DESC LIMIT 1"
