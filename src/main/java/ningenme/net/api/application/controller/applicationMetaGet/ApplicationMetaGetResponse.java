@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 public class ApplicationMetaGetResponse {
-  private final List<ApplicationMetaDto> applicationMetaDtos;
+  private final List<ApplicationMetaDto> applicationMetas;
 
   public static ApplicationMetaGetResponse of(@NonNull final List<ApplicationMeta> applicationMetas) {
     return new ApplicationMetaGetResponse(

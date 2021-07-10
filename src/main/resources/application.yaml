@@ -11,6 +11,17 @@ spring:
   web:
     resources:
       add-mappings: false
+logging:
+  level:
+    org:
+      springframework: WARN
+    ningenme:
+      net:
+        api:
+          infrastructure:
+            mysql:
+              mapper: DEBUG
+
 mybatis:
   configuration:
     map-underscore-to-camel-case: true

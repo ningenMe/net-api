@@ -3,6 +3,7 @@ package ningenme.net.api.domain.entity;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import ningenme.net.api.domain.value.BlogTitle;
 import ningenme.net.api.domain.value.BlogType;
 import ningenme.net.api.domain.value.PostedDate;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Data
 @Builder
+@Slf4j
 public class Blog {
   @NonNull
   private final BlogType blogType;
@@ -35,9 +37,25 @@ public class Blog {
     return blogDto;
   }
 
+  private static Blog of(@NonNull final BlogDto blogDto) {
+    log.info(blogDto.toString());
+    return Blog.builder()
+               .blogType(BlogType.of(blogDto.getBlogType()))
+               .blogTitle(BlogTitle.of(blogDto.getBlogTitle()))
+               .postedDate(PostedDate.of(blogDto.getPostedDate()))
+               .url(Url.of(blogDto.getUrl()))
+               .build();
+  }
+
   public static List<BlogDto> getBlogDtoList(@NonNull final List<Blog> blogList) {
     return blogList.stream()
                    .map(Blog::getBlogDto)
                    .collect(Collectors.toList());
+  }
+
+  public static List<Blog> of(@NonNull final List<BlogDto> blogDtoList) {
+    return blogDtoList.stream()
+                      .map(Blog::of)
+                      .collect(Collectors.toList());
   }
 }

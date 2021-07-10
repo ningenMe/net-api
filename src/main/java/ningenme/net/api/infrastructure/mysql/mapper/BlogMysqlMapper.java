@@ -4,6 +4,7 @@ import ningenme.net.api.infrastructure.mysql.dto.BlogDto;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -19,4 +20,16 @@ public interface BlogMysqlMapper {
           "</script>"
   )
   void insert(@Param("blodDtoList") List<BlogDto> blogDtoList);
+
+  @Select(
+          "<script>" +
+          "SELECT url,date AS postedDate,type AS blogType,title AS blogTitle FROM blogs WHERE type IN " +
+          "<foreach item='item' collection='blogTypeList' open='(' separator=',' close=') '>" +
+          "#{item} " +
+          "</foreach>" +
+          "ORDER BY postedDate DESC" +
+          "</script>"
+  )
+  List<BlogDto> select(@Param("blogTypeList") List<String> blogTypeList);
+
 }
