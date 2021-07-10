@@ -20,7 +20,7 @@ logging:
         api:
           infrastructure:
             mysql:
-              mapper: DEBUG
+              mapper: INFO
 
 mybatis:
   configuration:

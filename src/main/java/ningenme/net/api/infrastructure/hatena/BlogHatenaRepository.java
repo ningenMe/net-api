@@ -30,10 +30,13 @@ public class BlogHatenaRepository {
 
   public List<Blog> getBlog() {
     List<Blog> blogList = List.of();
-    for (Integer i = 1; i < PAGE_COUNT; i += 1) {
-      blogList = Stream.concat(blogList.stream(),
-                               getBlog(i).stream())
-                       .collect(Collectors.toList());
+    try {
+      for (Integer i = 1; i < PAGE_COUNT; i += 1) {
+        blogList = Stream.concat(blogList.stream(),
+                                 getBlog(i).stream())
+                         .collect(Collectors.toList());
+      }
+    } catch (Exception ex) {
     }
     return blogList;
   }

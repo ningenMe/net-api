@@ -16,7 +16,7 @@ public class ApplicationMetaMysqlRepository {
   private final ApplicationMetaMysqlMapper applicationMetaMysqlMapper;
 
   public List<ApplicationMeta> get(@NonNull final ApplicationMetaId applicationMetaId) {
-    return ApplicationMeta.of(
+    return ApplicationMeta.fromApplicationMetaDtoList(
             applicationMetaMysqlMapper.select(applicationMetaId.getValue()));
   }
 
