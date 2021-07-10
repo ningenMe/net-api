@@ -2,7 +2,9 @@ package ningenme.net.api.infrastructure.mysql;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import ningenme.net.api.domain.entity.Blog;
+import ningenme.net.api.domain.value.BlogType;
 import ningenme.net.api.infrastructure.mysql.mapper.BlogMysqlMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class BlogMysqlRepository {
   private final BlogMysqlMapper blogMysqlMapper;
 
@@ -19,5 +22,14 @@ public class BlogMysqlRepository {
       return;
     }
     blogMysqlMapper.insert(Blog.getBlogDtoList(blogList));
+  }
+
+  public List<Blog> get(@NonNull final List<BlogType> blogTypeList) {
+    log.info(blogTypeList.toString());
+    if(CollectionUtils.isEmpty(blogTypeList)) {
+      log.info("blogTypeList is empty");
+      return List.of();
+    }
+    return Blog.of(blogMysqlMapper.select(BlogType.of(blogTypeList)));
   }
 }

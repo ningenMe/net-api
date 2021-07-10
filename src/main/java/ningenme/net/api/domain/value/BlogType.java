@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -23,5 +25,10 @@ public enum BlogType {
       }
     }
     throw new RuntimeException(value + "is an unknown blog type");
+  }
+  public static List<String> of(@NonNull final List<BlogType> blogTypeList) {
+    return blogTypeList.stream()
+                       .map(BlogType::getValue)
+                       .collect(Collectors.toList());
   }
 }
