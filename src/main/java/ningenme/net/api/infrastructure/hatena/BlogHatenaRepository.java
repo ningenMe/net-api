@@ -53,6 +53,7 @@ public class BlogHatenaRepository {
         final String title = elements.get(index).text();
         final String url   = elements.get(index).attr("href");
         final List<String> list = Arrays.asList(PATTERN.split(url));
+        log.info("get " + title);
         try {
           blogList.add(Blog.builder()
                            .blogType(BlogType.HATENA)

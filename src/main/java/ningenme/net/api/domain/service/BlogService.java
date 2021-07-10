@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ningenme.net.api.domain.entity.Blog;
 import ningenme.net.api.domain.value.BlogType;
+import ningenme.net.api.infrastructure.ameba.BlogAmebaRepository;
 import ningenme.net.api.infrastructure.hatena.BlogHatenaRepository;
 import ningenme.net.api.infrastructure.mysql.BlogMysqlRepository;
 import ningenme.net.api.infrastructure.qiita.BlogQiitaRepository;
@@ -19,6 +20,7 @@ public class BlogService {
 
   private final BlogHatenaRepository blogHatenaRepository;
   private final BlogQiitaRepository blogQiitaRepository;
+  private final BlogAmebaRepository blogAmebaRepository;
   private final BlogMysqlRepository blogMysqlRepository;
 
   public void processBlog() {
@@ -33,6 +35,12 @@ public class BlogService {
       final List<Blog> blogList = blogQiitaRepository.getBlog();
       blogMysqlRepository.post(blogList);
       log.info("process qiita end");
+    }
+    {
+      log.info("process ameba start");
+      final List<Blog> blogList = blogAmebaRepository.getBlog();
+      blogMysqlRepository.post(blogList);
+      log.info("process ameba end");
     }
   }
 
