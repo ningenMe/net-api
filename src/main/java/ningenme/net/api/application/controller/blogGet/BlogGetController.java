@@ -24,7 +24,7 @@ public class BlogGetController {
           @ApiResponse(code = 200, message = "OK"),
   })
   @GetMapping("/v1/blogs")
-  ResponseEntity<BlogGetResponse> getApplicationMetaLatest(
+  ResponseEntity<BlogGetResponse> getBlog(
           @RequestParam("types") List<BlogType> blogTypeList) {
     return ResponseEntity
             .ok(BlogGetResponse.of(blogService.get(blogTypeList)));
