@@ -12,10 +12,10 @@ import java.sql.ResultSet
 import java.sql.Statement
 
 @SpringBootTest
-class ApplicationMetaRepositoryTest extends Specification {
+class ApplicationMetaMysqlRepositoryTest extends Specification {
 
     @Autowired
-    ApplicationMetaRepository applicationMetaRepository;
+    ApplicationMetaMysqlRepository applicationMetaMysqlRepository;
 
     @Autowired
     JdbcTemplate jdbctemplate;
@@ -32,7 +32,7 @@ class ApplicationMetaRepositoryTest extends Specification {
         Statement statement = connection.prepareStatement("INSERT INTO application_metas (application_meta_id) VALUES ('"+ target +"')")
         statement.execute()
         when:
-        def actual = applicationMetaRepository.getLatestOne(ApplicationMetaId.of(target));
+        def actual = applicationMetaMysqlRepository.getLatestOne(ApplicationMetaId.of(target));
         then:
         noExceptionThrown()
         assert actual.getApplicationMetaId().getValue() == expect
@@ -47,7 +47,7 @@ class ApplicationMetaRepositoryTest extends Specification {
         Statement statement = connection.prepareStatement("INSERT INTO application_metas (application_meta_id) VALUES ('hoge')")
         statement.execute()
         when:
-        applicationMetaRepository.getLatestOne();
+        applicationMetaMysqlRepository.getLatestOne();
         then:
         thrown(NullPointerException)
         where:
@@ -64,7 +64,7 @@ class ApplicationMetaRepositoryTest extends Specification {
         Statement statement2 = connection.prepareStatement("INSERT INTO application_metas (application_meta_id, created_time) VALUES ('"+ dbtarget +"', '2020-01-02 00:00:00')")
         statement2.execute()
         when:
-        def actual = applicationMetaRepository.get(ApplicationMetaId.of(target));
+        def actual = applicationMetaMysqlRepository.get(ApplicationMetaId.of(target));
         then:
         noExceptionThrown()
         assert actual.size() == expect
@@ -80,7 +80,7 @@ class ApplicationMetaRepositoryTest extends Specification {
         Statement statement1 = connection.prepareStatement("INSERT INTO application_metas (application_meta_id) VALUES ('"+ target +"')")
         statement1.execute()
         when:
-        applicationMetaRepository.get();
+        applicationMetaMysqlRepository.get();
         then:
         thrown(NullPointerException)
         where:
@@ -91,7 +91,7 @@ class ApplicationMetaRepositoryTest extends Specification {
     @Unroll
     def "[正常系] post 適切なinsertができている"() {
         when:
-        applicationMetaRepository.post(ApplicationMetaId.of("net-api"));
+        applicationMetaMysqlRepository.post(ApplicationMetaId.of("net-api"));
         Statement statement = connection.prepareStatement("SELECT * FROM application_metas")
         ResultSet resultSet = statement.executeQuery()
         resultSet.next()
@@ -103,7 +103,7 @@ class ApplicationMetaRepositoryTest extends Specification {
     @Unroll
     def "[異常系] post #target nullPointerExceptionが返る"() {
         when:
-        applicationMetaRepository.post(null);
+        applicationMetaMysqlRepository.post(null);
         then:
         thrown(NullPointerException)
     }

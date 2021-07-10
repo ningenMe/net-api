@@ -5,18 +5,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ningenme.net.api.domain.entity.NetUser;
 import ningenme.net.api.domain.value.NetUserId;
-import ningenme.net.api.infrastructure.mysql.mapper.NetUserMapper;
+import ningenme.net.api.infrastructure.mysql.mapper.NetUserMysqlMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
 @Slf4j
-public class NetUserRepository {
+public class NetUserMysqlRepository {
 
-  private final NetUserMapper netUserMapper;
+  private final NetUserMysqlMapper netUserMysqlMapper;
 
   public void post(@NonNull NetUser netUser) {
-    netUserMapper.insert(netUser.getNetUserId().getValue(),
+    netUserMysqlMapper.insert(netUser.getNetUserId().getValue(),
                          netUser.getEncryptedPassword().getValue(),
                          netUser.getNetUserRole().getValue()
                         );
@@ -24,7 +24,7 @@ public class NetUserRepository {
 
   public NetUser get(@NonNull final NetUserId netUserId) {
     try {
-      return NetUser.of(netUserMapper.select(netUserId.getValue()));
+      return NetUser.of(netUserMysqlMapper.select(netUserId.getValue()));
     } catch (Exception ex) {
       return null;
     }
