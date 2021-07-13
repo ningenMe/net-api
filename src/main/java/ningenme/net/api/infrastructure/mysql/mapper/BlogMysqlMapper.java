@@ -24,7 +24,7 @@ public interface BlogMysqlMapper {
 
   @Select(
           "<script>" +
-          "SELECT url,date AS postedDate,type AS blogType,title,liked AS blogTitle FROM blogs WHERE type IN " +
+          "SELECT url,date AS postedDate,type AS blogType,title AS blogTitle,liked FROM blogs WHERE type IN " +
           "<foreach item='item' collection='blogTypeList' open='(' separator=',' close=') '>" +
           "#{item} " +
           "</foreach>" +
