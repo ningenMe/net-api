@@ -28,6 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .mvcMatchers(HttpMethod.GET , "/v1/**").permitAll()
+                .mvcMatchers(HttpMethod.PUT, "/v1/diaries/*/liked").permitAll()
                 .mvcMatchers(HttpMethod.POST, "/v1/net/users").hasAuthority(NetUserRole.ADMIN.getValue())
                 .mvcMatchers(HttpMethod.POST, "/v1/application-metas/**").hasAuthority(NetUserRole.ADMIN.getValue())
                 .anyRequest().authenticated()

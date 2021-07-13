@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
@@ -13,9 +14,9 @@ public interface BlogMysqlMapper {
 
   @Insert(
           "<script>" +
-          "REPLACE INTO blogs (url,date,type,title) VALUES " +
+          "REPLACE INTO blogs (url,date,type,title,liked) VALUES " +
           "<foreach item='item' collection='blodDtoList' open='' separator=',' close=''>" +
-          "(#{item.url},#{item.postedDate},#{item.blogType},#{item.blogTitle}) " +
+          "(#{item.url},#{item.postedDate},#{item.blogType},#{item.blogTitle},#{item.liked}) " +
           "</foreach>" +
           "</script>"
   )
@@ -23,7 +24,7 @@ public interface BlogMysqlMapper {
 
   @Select(
           "<script>" +
-          "SELECT url,date AS postedDate,type AS blogType,title AS blogTitle FROM blogs WHERE type IN " +
+          "SELECT url,date AS postedDate,type AS blogType,title,liked AS blogTitle FROM blogs WHERE type IN " +
           "<foreach item='item' collection='blogTypeList' open='(' separator=',' close=') '>" +
           "#{item} " +
           "</foreach>" +
@@ -31,5 +32,11 @@ public interface BlogMysqlMapper {
           "</script>"
   )
   List<BlogDto> select(@Param("blogTypeList") List<String> blogTypeList);
+
+  @Select(
+          "SELECT url,date AS postedDate,type AS blogType,title AS blogTitle,liked FROM blogs WHERE type = 'DIARY' " +
+          "AND date = #{postedDate} LIMIT 1"
+  )
+  BlogDto getDiaryByPostedDate(@Param("postedDate") LocalDate postedDate);
 
 }

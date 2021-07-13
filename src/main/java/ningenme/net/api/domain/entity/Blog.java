@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import ningenme.net.api.domain.value.BlogTitle;
 import ningenme.net.api.domain.value.BlogType;
+import ningenme.net.api.domain.value.Liked;
 import ningenme.net.api.domain.value.PostedDate;
 import ningenme.net.api.domain.value.Url;
 import ningenme.net.api.infrastructure.mysql.dto.BlogDto;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 @Slf4j
 public class Blog {
   @NonNull
@@ -26,6 +27,9 @@ public class Blog {
   private final PostedDate postedDate;
   @NonNull
   private final Url url;
+  @NonNull
+  @Builder.Default
+  private final Liked liked = Liked.of();
 
   private BlogDto getBlogDto() {
     BlogDto blogDto = new BlogDto();
@@ -34,16 +38,18 @@ public class Blog {
       blogDto.setBlogTitle(blogTitle.getValue());
       blogDto.setPostedDate(postedDate.getValue());
       blogDto.setUrl(url.getValue());
+      blogDto.setLiked(liked.getValue());
     }
     return blogDto;
   }
 
-  private static Blog of(@NonNull final BlogDto blogDto) {
+  public static Blog of(@NonNull final BlogDto blogDto) {
     return Blog.builder()
                .blogType(BlogType.of(blogDto.getBlogType()))
                .blogTitle(BlogTitle.of(blogDto.getBlogTitle()))
                .postedDate(PostedDate.of(blogDto.getPostedDate()))
                .url(Url.of(blogDto.getUrl()))
+               .liked(Liked.of(blogDto.getLiked()))
                .build();
   }
 

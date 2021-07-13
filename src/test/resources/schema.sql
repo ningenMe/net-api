@@ -20,6 +20,7 @@ CREATE TABLE `blogs` (
   `date`  varchar(255) NOT NULL,
   `type`  varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `liked` integer(10) NOT NULL DEFAULT 0,
   `deleted_time` timestamp NULL DEFAULT NULL,
   `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
