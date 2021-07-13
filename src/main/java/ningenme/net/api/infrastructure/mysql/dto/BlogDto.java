@@ -10,4 +10,5 @@ public class BlogDto {
   private LocalDate postedDate;
   private String blogType;
   private String blogTitle;
+  private Integer liked;
 }

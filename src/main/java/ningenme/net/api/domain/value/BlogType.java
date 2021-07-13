@@ -15,7 +15,7 @@ public enum BlogType {
   HATENA("HATENA"),
   QIITA("QIITA"),
   AMEBA("AMEBA"),
-  NINGENME_NET("NINGENME_NET"),
+  DIARY("DIARY"),
   ;
   private final String value;
   public static BlogType of(@NonNull final String value) {
