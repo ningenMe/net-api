@@ -61,19 +61,19 @@ public class BlogService {
   public DiaryWithAround getDiary(@NonNull final PostedDate postedDate) {
     final List<Blog> blogList = blogMysqlRepository.get(Collections.singletonList(BlogType.DIARY));
     Blog next = null;
-    Blog curr = null;
+    Blog curr = blogList.get(0);
     Blog prev = null;
-    if(blogList.size() > 0) prev = blogList.get(0);
+    Integer index = 0;
     for (final Blog blog: blogList) {
-      next = curr;
-      curr = prev;
-      prev = blog;
-      if(Objects.equals(curr.getPostedDate(),postedDate)) {
-        return DiaryWithAround.of(prev,curr,next);
+      if(Objects.equals(blog.getPostedDate(),postedDate)) {
+        break;
       }
+      index += 1;
     }
-    next = curr;
-    curr = prev;
-    return DiaryWithAround.of(null,curr,next);
+    if(index >= blogList.size()) index = 0;
+    curr = blogList.get(index);
+    if(index - 1 >= 0) next = blogList.get(index - 1);
+    if(index + 1 < blogList.size()) prev = blogList.get(index + 1);
+    return DiaryWithAround.of(prev,curr,next);
   }
 }
