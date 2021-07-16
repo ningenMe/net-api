@@ -8,6 +8,7 @@ import ningenme.net.api.domain.entity.DiaryWithAround;
 import ningenme.net.api.domain.value.BlogType;
 import ningenme.net.api.domain.value.PostedDate;
 import ningenme.net.api.infrastructure.ameba.BlogAmebaRepository;
+import ningenme.net.api.infrastructure.github.BlogGithubRepository;
 import ningenme.net.api.infrastructure.hatena.BlogHatenaRepository;
 import ningenme.net.api.infrastructure.mysql.BlogMysqlRepository;
 import ningenme.net.api.infrastructure.qiita.BlogQiitaRepository;
@@ -26,6 +27,7 @@ public class BlogService {
   private final BlogQiitaRepository blogQiitaRepository;
   private final BlogAmebaRepository blogAmebaRepository;
   private final BlogMysqlRepository blogMysqlRepository;
+  private final BlogGithubRepository blogGithubRepository;
 
   public void processBlog() {
     {
@@ -45,6 +47,15 @@ public class BlogService {
       final List<Blog> blogList = blogAmebaRepository.getBlog();
       blogMysqlRepository.post(blogList);
       log.info("process ameba end");
+    }
+  }
+
+  public void processDiary() {
+    {
+      log.info("process diary start");
+      final List<Blog> blogList = blogGithubRepository.getBlog();
+      blogMysqlRepository.post(blogList);
+      log.info("process diary end");
     }
   }
 
