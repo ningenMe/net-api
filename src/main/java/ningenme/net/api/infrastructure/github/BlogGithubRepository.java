@@ -45,7 +45,7 @@ public class BlogGithubRepository {
       final Elements elements = document.select("[class=js-navigation-open Link--primary]");
 
       List<Blog> blogList = new ArrayList<>();
-      for (final Element element: elements.stream().toList()) {
+      for (final Element element: elements.stream().collect(Collectors.toList())) {
         final String md  = element.text();
         final String date = md.substring(0,5);
         final String postedDate = year.toString() + "-" + date;
