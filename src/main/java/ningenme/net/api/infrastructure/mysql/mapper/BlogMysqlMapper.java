@@ -18,7 +18,7 @@ public interface BlogMysqlMapper {
           "<foreach item='item' collection='blodDtoList' open='' separator=',' close=''>" +
           "(#{item.url},#{item.postedDate},#{item.blogType},#{item.blogTitle},#{item.liked}) " +
           "</foreach>" +
-          "ON DUPLICATE KEY UPDATE title=VALUES(title)" +
+          "ON DUPLICATE KEY UPDATE title=VALUES(title), liked=VALUES(liked)" +
           "</script>"
   )
   void insert(@Param("blodDtoList") List<BlogDto> blogDtoList);
