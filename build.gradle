@@ -48,6 +48,8 @@ dependencies {
 	implementation 'org.jsoup:jsoup:1.13.1'
 	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//dbunit
+	testImplementation 'org.dbunit:dbunit:2.7.2'
 	//groovy
 	testImplementation "org.spockframework:spock-spring:2.0-groovy-3.0"
 	testImplementation "org.spockframework:spock-core:2.0-groovy-3.0"

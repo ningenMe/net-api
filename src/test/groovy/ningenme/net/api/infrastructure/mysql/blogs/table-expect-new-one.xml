@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <blogs
+            url="http://localhost:8080/blog1"
+            date="2021-01-01"
+            type="DIARY"
+            title="blog1"
+            liked="0"
+    />
+    <blogs
+            url="https://ameblo.jp/ningenme/entry-12323588612.html"
+            date="2017-10-23"
+            type="AMEBA"
+            title="【漫画】ランウェイで笑って 1巻【感想】"
+            liked="0"
+    />
+    <blogs
+            url="https://ameblo.jp/ningenme/entry-12335139547.html"
+            date="2017-12-10"
+            type="AMEBA"
+            title="【漫画】2017年の漫画振り返り"
+            liked="0"
+    />
+    <blogs
+            url="https://ningenme.hatenablog.com/entry/2021/04/17/044435"
+            date="2021-04-17"
+            type="HATENA"
+            title="むしょくstreak16"
+            liked="0"
+    />
+</dataset>
