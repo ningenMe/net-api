@@ -27,6 +27,13 @@ public class BlogMysqlRepository {
     blogMysqlMapper.insert(Blog.getBlogDtoList(blogList));
   }
 
+  public void put(@NonNull final List<Blog> blogList) {
+    if(CollectionUtils.isEmpty(blogList)) {
+      return;
+    }
+    blogMysqlMapper.upsert(Blog.getBlogDtoList(blogList));
+  }
+
   public List<Blog> get(@NonNull final List<BlogType> blogTypeList) {
     if(CollectionUtils.isEmpty(blogTypeList)) {
       log.info("blogTypeList is empty");

@@ -65,7 +65,7 @@ public class BlogService {
 
   public void putDiaryLiked(@NonNull final PostedDate postedDate) {
     final Blog blog = blogMysqlRepository.getDiaryByPostedDate(postedDate);
-    blogMysqlRepository.post(Collections.singletonList(blog.toBuilder().liked(blog.getLiked().plusOne()).build()));
+    blogMysqlRepository.put(Collections.singletonList(blog.toBuilder().liked(blog.getLiked().plusOne()).build()));
     log.info(blog.getUrl().getValue()+" diary was liked");
   }
 
