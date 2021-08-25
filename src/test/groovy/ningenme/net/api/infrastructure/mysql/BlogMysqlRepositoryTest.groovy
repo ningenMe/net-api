@@ -108,7 +108,40 @@ class BlogMysqlRepositoryTest extends Specification {
         [blog1,blog2,blog3] | "/table-expect-new-multi.xml" | "複数の新規追加"
         []                  | "/table-expect-empty.xml"     | "空のリスト"
         [blog4]             | "/table-expect-update.xml"    | "タイトル・いいねが更新される"
-        [blog5]             | "/table-expect-non-update.xml"| "typeなどが更新されない"
+        [blog5]             | "/table-expect-non-update.xml"| "titleだけが更新される"
+    }
+
+    @Unroll
+    def "[正常系] put #purpose"() {
+        setup:
+        DatabaseOperation.CLEAN_INSERT.execute(
+                iDatabaseConnection,
+                new FlatXmlDataSetBuilder().build(new File(FILE_PATH + "/table-setup.xml"))
+        )
+
+        when:
+        blogMysqlRepository.put(blogs);
+
+        then:
+        def actual = DefaultColumnFilter.excludedColumnsTable(
+                iDatabaseConnection.createDataSet().getTable("blogs"),
+                new String[]{"deleted_time","created_time","updated_time"}
+        )
+
+        def expect = DefaultColumnFilter.excludedColumnsTable(
+                new FlatXmlDataSetBuilder().build(new File(FILE_PATH + expectXml)).getTable("blogs"),
+                new String[]{"deleted_time","created_time","updated_time"}
+        )
+
+        assertEquals(expect,actual)
+        noExceptionThrown()
+
+        where:
+        blogs               | expectXml                      | purpose
+        [blog1]             | "/table-expect-new-one.xml"    | "単体の新規追加"
+        [blog1,blog2,blog3] | "/table-expect-new-multi.xml"  | "複数の新規追加"
+        []                  | "/table-expect-empty.xml"      | "空のリスト"
+        [blog4]             | "/table-expect-like-update.xml"| "タイトル・いいねが更新される"
     }
 
 }
