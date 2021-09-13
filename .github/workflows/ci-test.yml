@@ -10,8 +10,6 @@ on:
 jobs:
   assignee:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@master
       - uses: actions/github-script@0.9.0
