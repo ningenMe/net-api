@@ -19,7 +19,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const actor = ${{ github.actor }}
+            const actor = `${{ github.actor }}`
             github.issues.addAssignees({
               owner: context.repo.owner,
               repo: context.repo.repo,
