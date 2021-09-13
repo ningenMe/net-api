@@ -8,7 +8,7 @@ on:
     branches: [ master ]
 
 jobs:
-  assignee:
+  assignees:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -17,12 +17,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const actor = `${{ github.actor }}`
             github.issues.addAssignees({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              assignees: actor
+              assignees: `${{ github.actor }}`
             });
 
   check:
