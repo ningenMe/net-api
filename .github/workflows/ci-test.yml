@@ -23,6 +23,9 @@ jobs:
               issue_number: context.issue.number,
               assignees: `${{ github.actor }}`
             });
+      - name: diff
+        run: |
+          git diff
 
   check:
     runs-on: ubuntu-latest
