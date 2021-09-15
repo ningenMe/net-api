@@ -30,10 +30,10 @@ jobs:
           git fetch origin ${TARGET_BRANCH}
           diff=`git diff origin/${TARGET_BRANCH} HEAD --name-only --relative= | wc -l`
           echo "IS_DIFFED=${diff}" >> $GITHUB_ENV
-      - name: diff-true
-        if: ${IS_DIFFED} > 0
-        run: |
-          echo true
+#      - name: diff-true
+#        if: ${IS_DIFFED} > 0
+#        run: |
+#          echo true
       - name: diff-flase
         if: ${IS_DIFFED} == 0
         run: |
