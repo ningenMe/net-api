@@ -35,9 +35,9 @@ jobs:
 #        run: |
 #          echo true
       - name: diff-flase
-        if: ${IS_DIFFED} == '0'
+        if: '0' == '0'
         run: |
-          echo false
+          echo ${IS_DIFFED}
 
 
   check:
