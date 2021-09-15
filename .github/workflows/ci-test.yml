@@ -31,7 +31,7 @@ jobs:
           diff=`git diff origin/${TARGET_BRANCH} HEAD --name-only --relative= | wc -l`
           echo "IS_DIFFED=${diff}" >> $GITHUB_ENV
       - name: hoge
-        if: ${{IS_DIFFED == '0'}}
+        if: 'aa' == 'aa'
         run: |
           echo ${IS_DIFFED}
 
