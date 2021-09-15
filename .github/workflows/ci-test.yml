@@ -24,16 +24,20 @@ jobs:
               assignees: `${{ github.actor }}`
             });
       - name: diff
-        id: diff
         env:
           TARGET_BRANCH: ${{ github.base_ref }}
         run: |
           git fetch origin ${TARGET_BRANCH}
           diff=`git diff origin/${TARGET_BRANCH} HEAD --name-only --relative= | wc -l`
           echo "IS_DIFFED=${diff}" >> $GITHUB_ENV
-      - name: diff-check
+      - name: diff-true
+        if: ${IS_DIFFED} > 0
         run: |
-          echo ${IS_DIFFED}
+          echo true
+      - name: diff-flase
+        if: ${IS_DIFFED} == 0
+        run: |
+          echo false
 
 
   check:
