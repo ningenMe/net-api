@@ -24,8 +24,15 @@ jobs:
               assignees: `${{ github.actor }}`
             });
       - name: diff
+        id: diff
         run: |
-          git diff
+          git diff origin/master HEAD --name-only --relative= | wc -l
+      - name: diff-check
+        env:
+          IS_DIFFED: ${{ steps.diff.outputs.stdout }}
+        run: |
+          echo ${process.env.IS_DIFF}
+
 
   check:
     runs-on: ubuntu-latest
