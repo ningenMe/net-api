@@ -34,8 +34,8 @@ jobs:
 #        if: ${IS_DIFFED} > 0
 #        run: |
 #          echo true
-      - name: diff-flase
-        if: '0' == '0'
+      - name: hoge
+        if: ${IS_DIFFED} == '0'
         run: |
           echo ${IS_DIFFED}
 
