@@ -28,14 +28,13 @@ jobs:
         env:
           TARGET_BRANCH: ${{ github.base_ref }}
         run: |
-          echo ${TARGET_BRANCH}
-          git fetch
+          git fetch origin/${TARGET_BRANCH}
           git diff origin/${TARGET_BRANCH} HEAD --name-only --relative= | wc -l
       - name: diff-check
         env:
           IS_DIFFED: ${{ steps.diff.outputs.stdout }}
         run: |
-          echo ${process.env.IS_DIFF}
+          echo ${process.env.IS_DIFFED}
 
 
   check:
