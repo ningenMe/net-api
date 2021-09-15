@@ -29,12 +29,11 @@ jobs:
           TARGET_BRANCH: ${{ github.base_ref }}
         run: |
           git fetch origin ${TARGET_BRANCH}
-          git diff origin/${TARGET_BRANCH} HEAD --name-only --relative= | wc -l
+          diff=`git diff origin/${TARGET_BRANCH} HEAD --name-only --relative= | wc -l`
+          echo "IS_DIFFED=${diff}" >> $GITHUB_ENV
       - name: diff-check
-        env:
-          IS_DIFFED: ${{ steps.diff.outputs.stdout }}
         run: |
-          echo ${process.env.IS_DIFFED}
+          echo ${IS_DIFFED}
 
 
   check:
