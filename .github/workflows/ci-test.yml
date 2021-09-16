@@ -52,6 +52,21 @@ jobs:
               issue_number: context.issue.number,
               labels : ['bug','documentation']
             });
+  diff2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: diff
+        env:
+          TARGET_BRANCH: ${{ github.base_ref }}
+        run: |
+          git fetch origin ${TARGET_BRANCH}
+          diff=`git diff origin/${TARGET_BRANCH} HEAD --name-only --relative= | wc -l`
+          echo "IS_DIFFED=${diff}" >> $GITHUB_ENV
+      - name: diff-false
+        if: env.IS_DIFFED == 0
+        run: |
+          echo false
 
 
   check:
