@@ -30,10 +30,14 @@ jobs:
           git fetch origin ${TARGET_BRANCH}
           diff=`git diff origin/${TARGET_BRANCH} HEAD --name-only --relative= | wc -l`
           echo "IS_DIFFED=${diff}" >> $GITHUB_ENV
-      - name: hoge
+      - name: diff-true
         if: env.IS_DIFFED > 0
         run: |
-          echo ${IS_DIFFED}
+          echo true
+      - name: diff-false
+        if: env.IS_DIFFED == 0
+        run: |
+          echo false
 
 
   check:
