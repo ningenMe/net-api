@@ -39,6 +39,19 @@ jobs:
         run: |
           echo false
 
+  hoge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: diff-true
+        if: env.IS_DIFFED > 0
+        run: |
+          echo true
+      - name: diff-false
+        if: env.IS_DIFFED == 0
+        run: |
+          echo false
+
 
   check:
     runs-on: ubuntu-latest
