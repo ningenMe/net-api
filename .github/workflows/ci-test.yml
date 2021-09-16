@@ -23,12 +23,16 @@ jobs:
               issue_number: context.issue.number,
               assignees: `${{ github.actor }}`
             });
+  diff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
       - name: diff
         env:
           TARGET_BRANCH: ${{ github.base_ref }}
         run: |
           git fetch origin ${TARGET_BRANCH}
-          diff=`git diff origin/${TARGET_BRANCH} HEAD --name-only --relative=src | wc -l`
+          diff=`git diff origin/${TARGET_BRANCH} HEAD --name-only --relative= | wc -l`
           echo "IS_DIFFED=${diff}" >> $GITHUB_ENV
       - name: diff-true
         if: env.IS_DIFFED > 0
@@ -38,6 +42,17 @@ jobs:
         if: env.IS_DIFFED == 0
         run: |
           echo false
+      - uses: actions/github-script@v4.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels[].name : ['bug','documentation']
+            });
+
 
   check:
     runs-on: ubuntu-latest
