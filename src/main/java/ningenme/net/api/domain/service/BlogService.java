@@ -7,11 +7,7 @@ import ningenme.net.api.domain.entity.Blog;
 import ningenme.net.api.domain.entity.DiaryWithAround;
 import ningenme.net.api.domain.value.BlogType;
 import ningenme.net.api.domain.value.PostedDate;
-import ningenme.net.api.infrastructure.ameba.BlogAmebaRepository;
-import ningenme.net.api.infrastructure.github.BlogGithubRepository;
-import ningenme.net.api.infrastructure.hatena.BlogHatenaRepository;
 import ningenme.net.api.infrastructure.mysql.BlogMysqlRepository;
-import ningenme.net.api.infrastructure.qiita.BlogQiitaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -23,41 +19,7 @@ import java.util.Objects;
 @Slf4j
 public class BlogService {
 
-  private final BlogHatenaRepository blogHatenaRepository;
-  private final BlogQiitaRepository blogQiitaRepository;
-  private final BlogAmebaRepository blogAmebaRepository;
   private final BlogMysqlRepository blogMysqlRepository;
-  private final BlogGithubRepository blogGithubRepository;
-
-  public void processBlog() {
-    {
-      log.info("process hatena start");
-      final List<Blog> blogList = blogHatenaRepository.getBlog();
-      blogMysqlRepository.post(blogList);
-      log.info("process hatena end");
-    }
-    {
-      log.info("process qiita start");
-      final List<Blog> blogList = blogQiitaRepository.getBlog();
-      blogMysqlRepository.post(blogList);
-      log.info("process qiita end");
-    }
-    {
-      log.info("process ameba start");
-      final List<Blog> blogList = blogAmebaRepository.getBlog();
-      blogMysqlRepository.post(blogList);
-      log.info("process ameba end");
-    }
-  }
-
-  public void processDiary() {
-    {
-      log.info("process diary start");
-      final List<Blog> blogList = blogGithubRepository.getBlog();
-      blogMysqlRepository.post(blogList);
-      log.info("process diary end");
-    }
-  }
 
   public List<Blog> get(@NonNull final List<BlogType> blogTypeList) {
     return blogMysqlRepository.get(blogTypeList);

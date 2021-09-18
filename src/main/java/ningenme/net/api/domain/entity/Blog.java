@@ -10,7 +10,6 @@ import ningenme.net.api.domain.value.Liked;
 import ningenme.net.api.domain.value.PostedDate;
 import ningenme.net.api.domain.value.Url;
 import ningenme.net.api.infrastructure.mysql.dto.BlogDto;
-import ningenme.net.api.infrastructure.qiita.dto.BlogQiitaDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,15 +52,6 @@ public class Blog {
                .build();
   }
 
-  private static Blog of(@NonNull final BlogQiitaDto blogQiitaDto) {
-    return Blog.builder()
-               .blogType(BlogType.QIITA)
-               .blogTitle(BlogTitle.of(blogQiitaDto.getTitle()))
-               .postedDate(PostedDate.of(blogQiitaDto.getPostedTime()))
-               .url(Url.of(blogQiitaDto.getUrl()))
-               .build();
-  }
-
   public static List<BlogDto> getBlogDtoList(@NonNull final List<Blog> blogList) {
     return blogList.stream()
                    .map(Blog::getBlogDto)
@@ -74,10 +64,4 @@ public class Blog {
                       .collect(Collectors.toList());
   }
 
-  public static List<Blog> fromBlogQiitaDtoList(@NonNull final List<BlogQiitaDto> blogQiitaDtoList) {
-    return blogQiitaDtoList
-            .stream()
-            .map(Blog::of)
-            .collect(Collectors.toList());
-  }
 }
