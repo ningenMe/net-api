@@ -26,39 +26,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .mvcMatchers(HttpMethod.GET , "/v1/**").permitAll()
-                .mvcMatchers(HttpMethod.PUT, "/v1/diaries/*/liked").permitAll()
-                .mvcMatchers(HttpMethod.POST, "/v1/net/users").hasAuthority(NetUserRole.ADMIN.getValue())
-                .mvcMatchers(HttpMethod.POST, "/v1/application-metas/**").hasAuthority(NetUserRole.ADMIN.getValue())
-                .anyRequest().authenticated()
+            .authorizeRequests()
+            .mvcMatchers(HttpMethod.GET , "/v1/**").permitAll()
+            .mvcMatchers(HttpMethod.PUT, "/v1/diaries/*/liked").permitAll()
+            .mvcMatchers(HttpMethod.POST, "/v1/net/users").hasAuthority(NetUserRole.ADMIN.getValue())
+            .mvcMatchers(HttpMethod.POST, "/v1/application-metas/**").hasAuthority(NetUserRole.ADMIN.getValue())
+            .anyRequest().authenticated()
 
-                //login
-                .and()
-                .formLogin()
-                .loginProcessingUrl(netApiSecurityConfig.getLoginPath())
-                .permitAll()
-                .usernameParameter(netApiSecurityConfig.getUserNameParameter())
-                .passwordParameter(netApiSecurityConfig.getPasswordParameter())
-                .successHandler(cookieAuthenticationSuccessHandler)
+            //login
+            .and()
+            .formLogin()
+            .loginProcessingUrl(netApiSecurityConfig.getLoginPath())
+            .permitAll()
+            .usernameParameter(netApiSecurityConfig.getUserNameParameter())
+            .passwordParameter(netApiSecurityConfig.getPasswordParameter())
+            .successHandler(cookieAuthenticationSuccessHandler)
 
-                .and()
-                .addFilterBefore(loggingFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(netApiAuthorizationFilter,UsernamePasswordAuthenticationFilter.class)
+            .and()
+            .addFilterBefore(loggingFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(netApiAuthorizationFilter,UsernamePasswordAuthenticationFilter.class)
 
-                .sessionManagement()
-                .disable()
+            .sessionManagement()
+            .disable()
 
-                .csrf()
-                .disable()
+            .csrf()
+            .disable()
 
-                .headers()
-                .cacheControl()
-                .disable()
+            .headers()
+            .cacheControl()
+            .disable()
 
-                .and()
-                .cors()
-                .configurationSource(getConfigurationSource());
+            .and()
+            .cors()
+            .configurationSource(getConfigurationSource());
     }
 
     private CorsConfigurationSource getConfigurationSource() {

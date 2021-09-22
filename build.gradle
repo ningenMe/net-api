@@ -46,6 +46,8 @@ dependencies {
 	implementation 'com.squareup.okhttp3:okhttp:4.9.0'
 	//jsoup
 	implementation 'org.jsoup:jsoup:1.13.1'
+    //sqs
+    implementation 'com.amazonaws:aws-java-sdk-sqs:1.12.70'
 	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//dbunit
@@ -59,7 +61,7 @@ dependencies {
 task dockerComposeUp (type: Exec) {
 	commandLine 'docker-compose','-f','src/test/resources/docker-compose.yaml','up','-d'
 	doLast {
-		Thread.sleep(5 * 1000) //5secまつ
+		Thread.sleep(20 * 1000) //20secまつ
 	}
 }
 

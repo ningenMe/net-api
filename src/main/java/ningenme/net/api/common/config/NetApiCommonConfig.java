@@ -7,6 +7,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Getter
 public class NetApiCommonConfig {
-  @Value("${net.api.common.domain}")
-  private String domain;
+    @Value("${net.api.common.domain}")
+    private String domain;
 }
