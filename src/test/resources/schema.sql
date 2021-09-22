@@ -26,3 +26,15 @@ CREATE TABLE `blogs` (
   `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`url`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `problems` (
+  `problem_id` integer(10) unsigned AUTO_INCREMENT NOT NULL,
+  `url` varchar(511) NOT NULL,
+  `problem_name` varchar(511) NOT NULL,
+  `estimation` int(10) unsigned NOT NULL DEFAULT '0',
+  `deleted_time` timestamp NULL DEFAULT NULL,
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`problem_id`),
+  UNIQUE `url` (`url`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
