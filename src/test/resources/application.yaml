@@ -21,3 +21,8 @@ net:
     security:
       encrypt-secret: mYq3t6w9z$C&F)J@NcQfTjWnZr4u7x!A
       encrypt-algorithm: HmacSHA256
+    sqs:
+      user-access-key-id: hoge
+      user-secret-access-key: fuga
+      url-problem-sqs: http://localhost:8080
+
