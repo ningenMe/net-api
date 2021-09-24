@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import ningenme.net.api.application.controller.netUserPost.NetUserPostRequest;
+import ningenme.net.api.application.controller.netUser.postDto.NetUserPostRequest;
 import ningenme.net.api.domain.value.EncryptedPassword;
 import ningenme.net.api.domain.value.NetUserId;
 import ningenme.net.api.domain.value.NetUserRole;
