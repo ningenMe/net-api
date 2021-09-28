@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor(staticName = "of")
-public class BlogTitle {
+public class WorkName {
     @NonNull
     private final String value;
 }
