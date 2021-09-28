@@ -12,7 +12,7 @@ public interface ComicMysqlMapper {
 
   @Select(
           "<script>" +
-          "SELECT comic_id,isbn13,url,work_id,comic_name,published_date FROM comics WHERE isbn13 IN " +
+          "SELECT comic_id,isbn13,url,comics.work_id,comic_name,published_date,work_name,publisher_name FROM comics JOIN works ON comics.work_id = works.work_id WHERE isbn13 IN " +
           "<foreach item='item' collection='isbn13List' open='(' separator=',' close=') '>" +
           "#{item} " +
           "</foreach>" +

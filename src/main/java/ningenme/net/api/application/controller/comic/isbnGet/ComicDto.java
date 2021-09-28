@@ -20,6 +20,8 @@ public class ComicDto {
     private final Integer workId;
     private final String comicName;
     private final LocalDate publishedDate;
+    private final String workName;
+    private final String publisherName;
 
     private static ComicDto of(@NonNull final Comic comic) {
         return new ComicDto(
@@ -28,7 +30,9 @@ public class ComicDto {
             comic.getUrl().getValue(),
             comic.getWorkId().getValue(),
             comic.getComicName().getValue(),
-            comic.getPublishedDate().getValue()
+            comic.getPublishedDate().getValue(),
+            comic.getWorkName().getValue(),
+            comic.getPublisherName().getValue()
         );
     }
 
