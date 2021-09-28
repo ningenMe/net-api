@@ -1,7 +1,6 @@
 # net-api
-[![ci-test](https://github.com/ningenMe/net-api/actions/workflows/ci-test.yml/badge.svg)](https://github.com/ningenMe/net-api/actions/workflows/ci-test.yml)
-[![cd-resource-push](https://github.com/ningenMe/net-api/actions/workflows/cd-resource-push.yml/badge.svg)](https://github.com/ningenMe/net-api/actions/workflows/cd-resource-push.yml)
-[![cd-code-deploy](https://github.com/ningenMe/net-api/actions/workflows/cd-code-deploy.yml/badge.svg)](https://github.com/ningenMe/net-api/actions/workflows/cd-code-deploy.yml)
+[![ci](https://github.com/ningenMe/net-api/actions/workflows/ci.yml/badge.svg)](https://github.com/ningenMe/net-api/actions/workflows/ci.yml)
+[![cd](https://github.com/ningenMe/net-api/actions/workflows/cd.yml/badge.svg)](https://github.com/ningenMe/net-api/actions/workflows/cd.yml)
 
 趣味開発のバックエンド全般  
 

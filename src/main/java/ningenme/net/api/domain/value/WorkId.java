@@ -4,11 +4,11 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class Estimation {
+public class WorkId {
     @NonNull
     private final Integer value;
 
-    public static Estimation of(@NonNull final Integer value) {
-        return new Estimation(Math.max(value, 0));
+    public static WorkId of(@NonNull final Integer value) {
+        return new WorkId(value);
     }
 }
