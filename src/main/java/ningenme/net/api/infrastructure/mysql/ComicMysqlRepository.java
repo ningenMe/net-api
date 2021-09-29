@@ -27,4 +27,8 @@ public class ComicMysqlRepository {
     return ComicDto.getComicList(comicMysqlMapper.select(isbn13List.stream().map(Isbn13::getValue).collect(Collectors.toList())));
   }
 
+  public Integer getCount() {
+      return comicMysqlMapper.selectCount();
+  }
+
 }
