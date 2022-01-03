@@ -23,7 +23,7 @@ public class ComicMeController {
     @GetMapping("/v1/comicme/metas")
     ResponseEntity<ComicMeMetaGetResponse> getMeta() {
         return ResponseEntity
-            .ok(ComicMeMetaGetResponse.of(comicMeService.getMeta()));
+            .ok(ComicMeMetaGetResponse.of(comicMeService.getComicMeMeta()));
     }
 
 }
