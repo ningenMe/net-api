@@ -57,6 +57,10 @@ dependencies {
 	testImplementation "org.spockframework:spock-spring:2.0-groovy-3.0"
 	testImplementation "org.spockframework:spock-core:2.0-groovy-3.0"
 	testImplementation "org.codehaus.groovy:groovy-all:3.0.8"
+
+    //openapiで必須 javax, jackson
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.1'
 }
 
 task dockerComposeUp (type: Exec) {
@@ -82,13 +86,19 @@ jacoco {
 }
 
 openApiGenerate {
-    generatorName = "java"
+    generatorName = "spring"
     inputSpec = "$rootDir/src/main/openapi/openapi.yaml".toString()
-    outputDir = "$buildDir/generated".toString()
+    outputDir = "$rootDir".toString()
     apiPackage = "ningenme.net.api.application.generated.api"
-    invokerPackage = "ningenme.net.api.application.generated.invoker"
     modelPackage = "ningenme.net.api.application.generated.model"
+    modelNameSuffix = "view"
+    generateModelTests = false
+    generateApiTests = false
+    generateModelDocumentation = false
+    generateApiDocumentation = false
     configOptions = [
-        dateLibrary: "java11"
+        dateLibrary: "java11",
+        interfaceOnly: 'true',
+        skipDefaultInterface: 'true',
     ]
 }

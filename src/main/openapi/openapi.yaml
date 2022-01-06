@@ -7,14 +7,4 @@ servers:
   - url: https://api.ningenme.net
 paths:
   /blogs/posted-counts:
-    get: # GET
-      tags:
-        - blog
-      parameters: []
-      responses:
-        '201':
-          description: normal response
-#          content:
-#            application/json:
-#              schema:
-#                $ref: 'responses/BlogPostedCountGet.yaml'
+    $ref: './paths/BlogsPostedCounts.yaml'

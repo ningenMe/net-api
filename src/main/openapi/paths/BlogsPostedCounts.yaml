@@ -1,0 +1,11 @@
+get:
+  tags:
+    - blog
+  parameters: []
+  responses:
+    '200':
+      description: ok
+      content:
+        application/json:
+          schema:
+            $ref: '../responses/BlogsPostedCountsGetResponse.yaml'
