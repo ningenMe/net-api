@@ -1,0 +1,20 @@
+openapi: 3.0.0
+info:
+  title: net-api
+  description: api created by ningenme
+  version: 1.0.0
+servers:
+  - url: https://api.ningenme.net
+paths:
+  /blogs/posted-counts:
+    get: # GET
+      tags:
+        - blog
+      parameters: []
+      responses:
+        '201':
+          description: normal response
+#          content:
+#            application/json:
+#              schema:
+#                $ref: 'responses/BlogPostedCountGet.yaml'
