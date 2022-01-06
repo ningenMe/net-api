@@ -17,7 +17,7 @@ import java.util.*;
 /**
  * MonthCountView
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-07T02:50:31.307122+09:00[Asia/Tokyo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 public class MonthCountView   {
   @JsonProperty("month")
   private String month;

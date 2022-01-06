@@ -6,5 +6,5 @@ info:
 servers:
   - url: https://api.ningenme.net
 paths:
-  /blogs/posted-counts:
+  /v1/blogs/posted-counts:
     $ref: './paths/BlogsPostedCounts.yaml'

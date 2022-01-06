@@ -20,7 +20,7 @@ import java.util.*;
 /**
  * BlogsPostedCountsGetResponseView
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-07T02:50:31.307122+09:00[Asia/Tokyo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 public class BlogsPostedCountsGetResponseView   {
   @JsonProperty("monthCounts")
   @Valid
@@ -33,7 +33,7 @@ public class BlogsPostedCountsGetResponseView   {
 
   public BlogsPostedCountsGetResponseView addMonthCountsItem(MonthCountView monthCountsItem) {
     if (this.monthCounts == null) {
-      this.monthCounts = new ArrayList<MonthCountView>();
+      this.monthCounts = new ArrayList<>();
     }
     this.monthCounts.add(monthCountsItem);
     return this;

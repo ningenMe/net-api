@@ -20,13 +20,13 @@ import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2022-01-07T02:50:31.307122+09:00[Asia/Tokyo]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 @Validated
-@Api(value = "blogs", description = "the blogs API")
-public interface BlogsApi {
+@Api(value = "Blog", description = "the Blog API")
+public interface BlogApi {
 
     /**
-     * GET /blogs/posted-counts
+     * GET /v1/blogs/posted-counts
      *
      * @return ok (status code 200)
      */
@@ -37,7 +37,7 @@ public interface BlogsApi {
         @ApiResponse(code = 200, message = "ok", response = BlogsPostedCountsGetResponseView.class) })
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/blogs/posted-counts",
+        value = "/v1/blogs/posted-counts",
         produces = { "application/json" }
     )
     ResponseEntity<BlogsPostedCountsGetResponseView> blogsPostedCountsGet();

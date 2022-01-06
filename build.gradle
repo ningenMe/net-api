@@ -97,8 +97,10 @@ openApiGenerate {
     generateModelDocumentation = false
     generateApiDocumentation = false
     configOptions = [
-        dateLibrary: "java11",
-        interfaceOnly: 'true',
-        skipDefaultInterface: 'true',
+        dateLibrary            : "java8",
+        interfaceOnly          : 'true',
+        skipDefaultInterface   : 'true',
+        useTags                : 'true',
+        hideGenerationTimestamp: 'true'
     ]
 }
