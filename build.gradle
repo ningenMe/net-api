@@ -80,3 +80,15 @@ test {
 jacoco {
 	toolVersion = "0.8.7"
 }
+
+openApiGenerate {
+    generatorName = "java"
+    inputSpec = "$rootDir/src/main/openapi/openapi.yaml".toString()
+    outputDir = "$buildDir/generated".toString()
+    apiPackage = "ningenme.net.api.application.generated.api"
+    invokerPackage = "ningenme.net.api.application.generated.invoker"
+    modelPackage = "ningenme.net.api.application.generated.model"
+    configOptions = [
+        dateLibrary: "java11"
+    ]
+}
