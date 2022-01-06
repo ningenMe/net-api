@@ -1,0 +1,9 @@
+type: object
+required: [month, count]
+properties:
+  month:
+    type: string
+    pattern: '^\d{4}(0[1-9]|1[012])$'
+  count:
+    type: integer
+    minimum: 0

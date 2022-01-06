@@ -4,6 +4,7 @@ plugins {
 	id 'java'
 	id 'jacoco'
 	id 'groovy'
+    id 'org.openapi.generator' version '5.3.1'
 }
 
 group = 'ningenme.net'
@@ -56,6 +57,10 @@ dependencies {
 	testImplementation "org.spockframework:spock-spring:2.0-groovy-3.0"
 	testImplementation "org.spockframework:spock-core:2.0-groovy-3.0"
 	testImplementation "org.codehaus.groovy:groovy-all:3.0.8"
+
+    //openapiで必須 javax, jackson
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.1'
 }
 
 task dockerComposeUp (type: Exec) {
@@ -78,4 +83,24 @@ test {
 
 jacoco {
 	toolVersion = "0.8.7"
+}
+
+openApiGenerate {
+    generatorName = "spring"
+    inputSpec = "$rootDir/src/main/openapi/openapi.yaml".toString()
+    outputDir = "$rootDir".toString()
+    apiPackage = "ningenme.net.api.application.generated.api"
+    modelPackage = "ningenme.net.api.application.generated.model"
+    modelNameSuffix = "view"
+    generateModelTests = false
+    generateApiTests = false
+    generateModelDocumentation = false
+    generateApiDocumentation = false
+    configOptions = [
+        dateLibrary            : "java8",
+        interfaceOnly          : 'true',
+        skipDefaultInterface   : 'true',
+        useTags                : 'true',
+        hideGenerationTimestamp: 'true'
+    ]
 }
