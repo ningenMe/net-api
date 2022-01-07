@@ -37,7 +37,7 @@ public class MonthCountView   {
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
-@Pattern(regexp = "^\\d{4}(0[1-9]|1[012])$") 
+@Pattern(regexp = "^\\d{4}-(0[1-9]|1[012])$") 
   public String getMonth() {
     return month;
   }

@@ -5,13 +5,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ningenme.net.api.domain.entity.Blog;
 import ningenme.net.api.domain.entity.DiaryWithAround;
+import ningenme.net.api.domain.value.BlogMonthlyCount;
 import ningenme.net.api.domain.value.BlogType;
 import ningenme.net.api.domain.value.PostedDate;
+import ningenme.net.api.domain.value.PostedMonth;
 import ningenme.net.api.infrastructure.mysql.BlogMysqlRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -48,5 +51,11 @@ public class BlogService {
     if(index - 1 >= 0) next = blogList.get(index - 1);
     if(index + 1 < blogList.size()) prev = blogList.get(index + 1);
     return DiaryWithAround.of(prev,curr,next);
+  }
+
+  public List<BlogMonthlyCount> getBlogMonthlyCountList() {
+      final List<Blog> blogList = blogMysqlRepository.get(List.of(BlogType.values()));
+      final Map<PostedMonth,Integer> postedMonthCountMap = PostedMonth.getPostedMonthCountMap(blogList);
+      return BlogMonthlyCount.getBlogMonthlyCountList(postedMonthCountMap);
   }
 }
