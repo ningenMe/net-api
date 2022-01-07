@@ -8,11 +8,13 @@ import ningenme.net.api.domain.entity.DiaryWithAround;
 import ningenme.net.api.domain.value.BlogMonthlyCount;
 import ningenme.net.api.domain.value.BlogType;
 import ningenme.net.api.domain.value.PostedDate;
+import ningenme.net.api.domain.value.PostedMonth;
 import ningenme.net.api.infrastructure.mysql.BlogMysqlRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -53,6 +55,7 @@ public class BlogService {
 
   public List<BlogMonthlyCount> getBlogMonthlyCountList() {
       final List<Blog> blogList = blogMysqlRepository.get(List.of(BlogType.values()));
-      return BlogMonthlyCount.getBlogMonthlyCountList(blogList);
+      final Map<PostedMonth,Integer> postedMonthCountMap = PostedMonth.getPostedMonthCountMap(blogList);
+      return BlogMonthlyCount.getBlogMonthlyCountList(postedMonthCountMap);
   }
 }

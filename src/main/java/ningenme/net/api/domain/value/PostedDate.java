@@ -14,8 +14,6 @@ import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class PostedDate {
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM");
-
     @NonNull
     private final LocalDate value;
 
@@ -25,9 +23,5 @@ public class PostedDate {
 
     public static PostedDate of(@NonNull final String value) {
         return new PostedDate(LocalDate.parse(value.substring(0,10)));
-    }
-
-    public String getMonth() {
-        return value.format(DATE_TIME_FORMATTER);
     }
 }

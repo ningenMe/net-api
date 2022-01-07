@@ -7,35 +7,32 @@ import ningenme.net.api.domain.entity.Blog;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Data
-@RequiredArgsConstructor(staticName = "of")
-public class BlogMonthlyCount implements Comparable<BlogMonthlyCount> {
+@RequiredArgsConstructor
+public class BlogMonthlyCount {
     @NonNull
     private final String month;
     @NonNull
     private final Integer count;
 
+    private static BlogMonthlyCount of(
+        @NonNull final PostedMonth postedMonth,
+        @NonNull final Integer count
+    ) {
+        return new BlogMonthlyCount(postedMonth.getYearMonth(), count);
+    }
 
     public static List<BlogMonthlyCount> getBlogMonthlyCountList(
-        @NonNull final List<Blog> blogList
+        @NonNull final Map<PostedMonth,Integer> postedMonthCountMap
     ) {
-        return blogList
+        return PostedMonth
+            .getPostedMonthList()
             .stream()
-            .collect(Collectors.groupingBy(
-                blog -> blog.getPostedDate().getMonth(),
-                Collectors.summingInt(blog -> 1)
-            ))
-            .entrySet()
-            .stream()
-            .map(entry -> BlogMonthlyCount.of(entry.getKey(), entry.getValue()))
-            .sorted()
+            .map(postedMonth -> BlogMonthlyCount.of(postedMonth,postedMonthCountMap.getOrDefault(postedMonth,0)))
             .collect(Collectors.toList());
     }
 
-    @Override
-    public int compareTo(@NotNull BlogMonthlyCount o) {
-        return month.compareTo(o.month);
-    }
 }
