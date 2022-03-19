@@ -2,10 +2,11 @@ server:
   port: 8080
 spring:
   datasource:
-    url: ${MYSQL_URL}
-    username: ${MYSQL_USER}
-    password: ${MYSQL_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    ningenme-mysql:
+      url: ${NINGENME_MYSQL_URL}
+      username: ${NINGENME_MYSQL_ADMIN_USER_USERNAME}
+      password: ${NINGENME_MYSQL_ADMIN_USER_PASSWORD}
+      driver-class-name: com.mysql.cj.jdbc.Driver
   mvc:
     throw-exception-if-no-handler-found: true
   web:

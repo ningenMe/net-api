@@ -1,0 +1,5 @@
+type: object
+required: [dateCountList]
+properties:
+  mysql:
+    type: boolean

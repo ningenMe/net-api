@@ -6,5 +6,7 @@ info:
 servers:
   - url: https://api.ningenme.net
 paths:
+  /v1/healthcheck:
+    $ref: './paths/HealthCheck.yaml'
   /v1/blogs/posted-counts:
     $ref: './paths/BlogsPostedCounts.yaml'
