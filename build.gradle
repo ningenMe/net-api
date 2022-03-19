@@ -1,9 +1,9 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.1'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
-	id 'jacoco'
-	id 'groovy'
+    id 'org.springframework.boot' version '2.5.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'jacoco'
+    id 'groovy'
     id 'org.openapi.generator' version '5.3.1'
 }
 
@@ -12,77 +12,78 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	//main
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	//lombok
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	//swagger
-	implementation 'io.springfox:springfox-swagger2:2.9.2'
-	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-	implementation 'io.springfox:springfox-core:2.9.2'
-	//security
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	//jwt
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
-	implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
-	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
-	//mysql
-	implementation 'mysql:mysql-connector-java:8.0.21'
-	//mybatis
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.0'
-	//gson
-	implementation 'com.google.code.gson:gson:2.8.6'
-	//okhttp
-	implementation 'com.squareup.okhttp3:okhttp:4.9.0'
-	//jsoup
-	implementation 'org.jsoup:jsoup:1.13.1'
+    //main
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    //lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    //swagger
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation 'io.springfox:springfox-core:2.9.2'
+    //security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    //jwt
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    //mysql
+    implementation 'mysql:mysql-connector-java:8.0.21'
+    //mybatis
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.0'
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+    //okhttp
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    //jsoup
+    implementation 'org.jsoup:jsoup:1.13.1'
     //sqs
     implementation 'com.amazonaws:aws-java-sdk-sqs:1.12.70'
-	//test
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	//dbunit
-	testImplementation 'org.dbunit:dbunit:2.7.2'
-	//groovy
-	testImplementation "org.spockframework:spock-spring:2.0-groovy-3.0"
-	testImplementation "org.spockframework:spock-core:2.0-groovy-3.0"
-	testImplementation "org.codehaus.groovy:groovy-all:3.0.8"
+    //test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    //dbunit
+    testImplementation 'org.dbunit:dbunit:2.7.2'
+    //groovy
+    testImplementation "org.spockframework:spock-spring:2.0-groovy-3.0"
+    testImplementation "org.spockframework:spock-core:2.0-groovy-3.0"
+    testImplementation "org.codehaus.groovy:groovy-all:3.0.8"
 
     //openapiで必須 javax, jackson
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation 'org.openapitools:jackson-databind-nullable:0.2.1'
 }
 
-task dockerComposeUp (type: Exec) {
-	commandLine 'docker-compose','-f','src/test/resources/docker-compose.yaml','up','-d'
-	doLast {
-		Thread.sleep(20 * 1000) //20secまつ
-	}
+task dockerComposeUp(type: Exec) {
+    commandLine 'docker-compose', '-f', 'src/test/resources/docker-compose.yaml', 'up', '-d'
+    doLast {
+        Thread.sleep(20 * 1000) //20secまつ
+    }
 }
 
-task dockerComposeDown (type: Exec) {
-	commandLine 'docker-compose', '-f', 'src/test/resources/docker-compose.yaml', 'down', '--remove-orphans', '--volumes'
+task dockerComposeDown(type: Exec) {
+    commandLine 'docker-compose', '-f', 'src/test/resources/docker-compose.yaml', 'down', '--remove-orphans', '--volumes'
 }
 
 test {
-	useJUnitPlatform()
-	dependsOn(dockerComposeUp)
-	finalizedBy(dockerComposeDown)
-	finalizedBy(jacocoTestReport)
+    useJUnitPlatform()
+    jvmArgs = ['-Dspring.profiles.active=test']
+    dependsOn(dockerComposeUp)
+    finalizedBy(dockerComposeDown)
+    finalizedBy(jacocoTestReport)
 }
 
 jacoco {
-	toolVersion = "0.8.7"
+    toolVersion = "0.8.7"
 }
 
 openApiGenerate {

@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 
@@ -18,8 +17,8 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = {"ningenme.net.api.infrastructure.mysql.mapper"})
 public class NingenmeMysqlConfig {
 
+    public static final String DATA_SOURCE = "ningenmeMysqlDataSource";
     private static final String DATA_SOURCE_PROPERTIES = "ningenmeMysqlDataSourceProperties";
-    private static final String DATA_SOURCE = "ningenmeMysqlDataSource";
     private static final String DATA_SOURCE_TRANSACTION_MANAGER = "ningenmeMysqlTransactionManager";
     private static final String SQL_SESSION_FACTORY = "ningenmeMysqlSqlSessionFactory";
 
