@@ -1,16 +1,19 @@
 package ningenme.net.api.integration.login
 
 import ningenme.net.api.application.controller.netUser.postDto.NetUserPostRequest
+import ningenme.net.api.common.config.NingenmeMysqlConfig
 import ningenme.net.api.domain.entity.NetUser
 import ningenme.net.api.domain.service.NetUserService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+import spock.lang.Ignore
 import spock.lang.Specification
 
+import javax.sql.DataSource
 import java.sql.Connection
 import java.sql.Statement
 
@@ -18,7 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class loginPostTest extends Specification  {
+@Ignore
+class loginPostTest extends Specification {
 
     private final static API_PATH = "/v1/login"
 
@@ -29,7 +33,8 @@ class loginPostTest extends Specification  {
     NetUserService netUserService;
 
     @Autowired
-    JdbcTemplate jdbctemplate;
+    @Qualifier(NingenmeMysqlConfig.DATA_SOURCE)
+    DataSource dataSource;
 
     def setup() {
         //ユーザを作成しておく
@@ -40,7 +45,7 @@ class loginPostTest extends Specification  {
     }
 
     def cleanup() {
-        Connection connection = jdbctemplate.getDataSource().getConnection();
+        Connection connection = dataSource.getConnection();
         Statement statement = connection.prepareStatement("TRUNCATE net_users")
         statement.execute()
     }
@@ -49,7 +54,7 @@ class loginPostTest extends Specification  {
         when:
         mockMvc.perform(MockMvcRequestBuilders
             .post(API_PATH)
-            .param("email","spock_test_user")
+            .param("email", "spock_test_user")
             .param("password", "passw0rD"))
             .andExpect(status().isOk())
             .andReturn()
@@ -62,7 +67,7 @@ class loginPostTest extends Specification  {
         when:
         mockMvc.perform(MockMvcRequestBuilders
             .post(API_PATH)
-            .param("email","spock_test_user")
+            .param("email", "spock_test_user")
             .param("password", "hogeFuga0"))
             .andExpect(status().isFound())
             .andReturn()

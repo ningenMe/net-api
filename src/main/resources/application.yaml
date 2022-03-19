@@ -2,15 +2,16 @@ server:
   port: 8080
 spring:
   datasource:
-    url: ${MYSQL_URL}
-    username: ${MYSQL_USER}
-    password: ${MYSQL_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  mvc:
-    throw-exception-if-no-handler-found: true
+    ningenme-mysql:
+      url: ${NINGENME_MYSQL_URL}
+      username: ${NINGENME_MYSQL_MASTER_USER_USERNAME}
+      password: ${NINGENME_MYSQL_MASTER_USER_PASSWORD}
+      driver-class-name: com.mysql.cj.jdbc.Driver
   web:
     resources:
       add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
 logging:
   level:
     org:
@@ -21,10 +22,6 @@ logging:
           infrastructure:
             mysql:
               mapper: INFO
-
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
 net:
   api:
     common:
@@ -36,3 +33,7 @@ net:
       user-access-key-id: ${SQS_USER_ACCESS_KEY_ID}
       user-secret-access-key: ${SQS_USER_SECRET_ACCESS_KEY}
       url-problem-sqs: ${SQS_URL_PROBLEM_SQS}
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+

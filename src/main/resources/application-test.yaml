@@ -7,14 +7,21 @@ spring:
       username: root
       password: password
       driver-class-name: com.mysql.cj.jdbc.Driver
-  mvc:
-    throw-exception-if-no-handler-found: true
   web:
     resources:
       add-mappings: false
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+logging:
+  level:
+    org:
+      springframework: WARN
+    ningenme:
+      net:
+        api:
+          infrastructure:
+            mysql:
+              mapper: INFO
 net:
   api:
     common:
@@ -26,4 +33,7 @@ net:
       user-access-key-id: hoge
       user-secret-access-key: fuga
       url-problem-sqs: http://localhost:8080
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
 
