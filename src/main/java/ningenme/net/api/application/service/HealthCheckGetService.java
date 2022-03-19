@@ -14,12 +14,8 @@ public class HealthCheckGetService {
     private final HealthCheckService healthCheckService;
 
     public HealthCheckGetResponseView getHealthCheckGetResponseView() {
-//        return new HealthCheckGetResponseView().mysql(
-//            healthCheckService.isMysqlConnected()
-//        );
         return new HealthCheckGetResponseView().mysql(
-            false
+            healthCheckService.isMysqlConnected()
         );
-
     }
 }

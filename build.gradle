@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.1'
+    id 'org.springframework.boot' version '2.6.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'jacoco'
@@ -21,46 +21,53 @@ repositories {
     mavenCentral()
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2021.0.1"
+    }
+}
+
 dependencies {
     //main
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.4'
     //lombok
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
     //swagger
-    implementation 'io.springfox:springfox-swagger2:2.9.2'
-    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-    implementation 'io.springfox:springfox-core:2.9.2'
+    implementation 'io.springfox:springfox-swagger2:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+    implementation 'io.springfox:springfox-core:3.0.0'
     //security
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.6.4'
     //jwt
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
     //mysql
-    implementation 'mysql:mysql-connector-java:8.0.21'
+    implementation 'mysql:mysql-connector-java:8.0.28'
     //mybatis
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.0'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
     //gson
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.9.0'
     //okhttp
-    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
     //jsoup
-    implementation 'org.jsoup:jsoup:1.13.1'
+    implementation 'org.jsoup:jsoup:1.14.3'
     //sqs
-    implementation 'com.amazonaws:aws-java-sdk-sqs:1.12.70'
+    implementation 'com.amazonaws:aws-java-sdk-sqs:1.12.173'
     //test
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.4'
     //dbunit
-    testImplementation 'org.dbunit:dbunit:2.7.2'
+    testImplementation 'org.dbunit:dbunit:2.7.3'
     //groovy
-    testImplementation "org.spockframework:spock-spring:2.0-groovy-3.0"
-    testImplementation "org.spockframework:spock-core:2.0-groovy-3.0"
-    testImplementation "org.codehaus.groovy:groovy-all:3.0.8"
-
+    testImplementation 'org.spockframework:spock-spring:2.1-groovy-3.0'
+    testImplementation 'org.spockframework:spock-core:2.1-groovy-3.0'
+    testImplementation 'org.codehaus.groovy:groovy-all:3.0.10'
+    //sleuth
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth:3.1.1'
     //openapiで必須 javax, jackson
     implementation 'javax.validation:validation-api:2.0.1.Final'
-    implementation 'org.openapitools:jackson-databind-nullable:0.2.1'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.2'
 }
 
 task dockerComposeUp(type: Exec) {
