@@ -1,5 +1,3 @@
-server:
-  port: 8080
 spring:
   datasource:
     ningenme-mysql:
@@ -7,21 +5,16 @@ spring:
       username: root
       password: password
       driver-class-name: com.mysql.cj.jdbc.Driver
-  web:
-    resources:
-      add-mappings: false
-  mvc:
-    throw-exception-if-no-handler-found: true
-logging:
-  level:
-    org:
-      springframework: WARN
-    ningenme:
-      net:
-        api:
-          infrastructure:
-            mysql:
-              mapper: INFO
+    comicme-mysql:
+      url: jdbc:mysql://localhost:13306/comicme
+      username: root
+      password: password
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    compro-mysql:
+      url: jdbc:mysql://localhost:23306/compro
+      username: root
+      password: password
+      driver-class-name: com.mysql.cj.jdbc.Driver
 net:
   api:
     common:
@@ -33,7 +26,3 @@ net:
       user-access-key-id: hoge
       user-secret-access-key: fuga
       url-problem-sqs: http://localhost:8080
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-

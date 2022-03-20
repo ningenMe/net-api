@@ -1,39 +1,9 @@
-server:
-  port: 8080
 spring:
-  datasource:
-    ningenme-mysql:
-      url: ${NINGENME_MYSQL_URL}
-      username: ${NINGENME_MYSQL_MASTER_USER_USERNAME}
-      password: ${NINGENME_MYSQL_MASTER_USER_PASSWORD}
-      driver-class-name: com.mysql.cj.jdbc.Driver
-  web:
-    resources:
-      add-mappings: false
-  mvc:
-    throw-exception-if-no-handler-found: true
-logging:
-  level:
-    org:
-      springframework: WARN
-    ningenme:
-      net:
-        api:
-          infrastructure:
-            mysql:
-              mapper: INFO
-net:
-  api:
-    common:
-      domain: ${DOMAIN:ningenme.net}
-    security:
-      encrypt-secret: ${ENCRYPT_SECRET:mYq3t6w9z$C&F)J@NcQfTjWnZr4u7x!A}
-      encrypt-algorithm: ${ENCRYPT_ALGORITHM}
-    sqs:
-      user-access-key-id: ${SQS_USER_ACCESS_KEY_ID}
-      user-secret-access-key: ${SQS_USER_SECRET_ACCESS_KEY}
-      url-problem-sqs: ${SQS_URL_PROBLEM_SQS}
-mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-
+  profiles:
+    group:
+      prod:
+        - common
+        - prod
+      test:
+        - common
+        - test

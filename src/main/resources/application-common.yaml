@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  web:
+    resources:
+      add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+logging:
+  level:
+    org:
+      springframework: WARN
+    ningenme:
+      net:
+        api:
+          infrastructure:
+            mysql:
+              mapper: INFO

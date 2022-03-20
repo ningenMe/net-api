@@ -152,3 +152,14 @@ CREATE TABLE `relation_creators_works`
     FOREIGN KEY `creator_id_foreign` (`creator_id`) REFERENCES `creators` (`creator_id`) ON DELETE CASCADE,
     FOREIGN KEY `work_id_foreign` (`work_id`) REFERENCES `works` (`work_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE
+USER 'master_user' IDENTIFIED BY 'password'
+
+GRANT
+SELECT,
+INSERT
+,
+UPDATE,
+DELETE
+ON *.* TO 'master_user';
