@@ -2,10 +2,10 @@ package ningenme.net.api.domain.service;
 
 import lombok.RequiredArgsConstructor;
 import ningenme.net.api.domain.entity.ComicMeMeta;
-import ningenme.net.api.infrastructure.mysql.ComicMysqlRepository;
-import ningenme.net.api.infrastructure.mysql.CreatorMysqlRepository;
-import ningenme.net.api.infrastructure.mysql.PublisherMysqlRepository;
-import ningenme.net.api.infrastructure.mysql.WorkMysqlRepository;
+import ningenme.net.api.infrastructure.comicmeMysql.ComicMysqlRepository;
+import ningenme.net.api.infrastructure.comicmeMysql.CreatorMysqlRepository;
+import ningenme.net.api.infrastructure.comicmeMysql.PublisherMysqlRepository;
+import ningenme.net.api.infrastructure.comicmeMysql.WorkMysqlRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,10 +19,10 @@ public class ComicMeService {
 
     public ComicMeMeta getComicMeMeta() {
         return ComicMeMeta.builder()
-                          .publisherCount(publisherMysqlRepository.getCount())
-                          .creatorCount(creatorMysqlRepository.getCount())
-                          .workCount(workMysqlRepository.getCount())
-                          .comicCount(comicMysqlRepository.getCount())
-                          .build();
+            .publisherCount(publisherMysqlRepository.getCount())
+            .creatorCount(creatorMysqlRepository.getCount())
+            .workCount(workMysqlRepository.getCount())
+            .comicCount(comicMysqlRepository.getCount())
+            .build();
     }
 }

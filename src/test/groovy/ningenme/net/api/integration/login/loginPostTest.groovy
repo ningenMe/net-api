@@ -1,7 +1,7 @@
 package ningenme.net.api.integration.login
 
 import ningenme.net.api.application.controller.netUser.postDto.NetUserPostRequest
-import ningenme.net.api.common.config.NingenmeMysqlConfig
+import ningenme.net.api.common.config.db.NingenmeMysqlConfig
 import ningenme.net.api.domain.entity.NetUser
 import ningenme.net.api.domain.service.NetUserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+import spock.lang.Ignore
 import spock.lang.Specification
 
 import javax.sql.DataSource
@@ -20,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Ignore
 class loginPostTest extends Specification {
 
     private final static API_PATH = "/v1/login"

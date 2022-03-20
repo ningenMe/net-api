@@ -10,7 +10,7 @@ import ningenme.net.api.domain.value.EncryptedPassword;
 import ningenme.net.api.domain.value.NetUserId;
 import ningenme.net.api.domain.value.NetUserRole;
 import ningenme.net.api.domain.value.RawPassword;
-import ningenme.net.api.infrastructure.mysql.dto.NetUserDto;
+import ningenme.net.api.infrastructure.ningenmeMysql.dto.NetUserDto;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -19,41 +19,41 @@ import org.springframework.security.core.userdetails.User;
 @Builder(access = AccessLevel.PRIVATE)
 @Slf4j
 public class NetUser {
-  @NonNull
-  private final NetUserId netUserId;
-  @NonNull
-  private final NetUserRole netUserRole;
-  private final EncryptedPassword encryptedPassword;
+    @NonNull
+    private final NetUserId netUserId;
+    @NonNull
+    private final NetUserRole netUserRole;
+    private final EncryptedPassword encryptedPassword;
 
-  public static NetUser of(@NonNull final NetUserPostRequest netUserPostRequest) {
-    return NetUser
+    public static NetUser of(@NonNull final NetUserPostRequest netUserPostRequest) {
+        return NetUser
             .builder()
             .netUserId(NetUserId.of(netUserPostRequest.getNetUserId()))
             .netUserRole(NetUserRole.USER)
             .encryptedPassword(EncryptedPassword.of(RawPassword.of(netUserPostRequest.getPassword())))
             .build();
-  }
+    }
 
-  public static NetUser of(@NonNull final NetUserDto netUserDto) {
-    return NetUser
+    public static NetUser of(@NonNull final NetUserDto netUserDto) {
+        return NetUser
             .builder()
             .netUserId(NetUserId.of(netUserDto.getNetUserId()))
             .netUserRole(NetUserRole.of(netUserDto.getRole()))
             .encryptedPassword(EncryptedPassword.of(netUserDto.getPassword()))
             .build();
-  }
+    }
 
-  public User getUser() {
-    return new User(netUserId.getValue(),
-                    encryptedPassword.getValue(),
-                    AuthorityUtils.createAuthorityList(netUserRole.getValue()));
-  }
+    public User getUser() {
+        return new User(netUserId.getValue(),
+            encryptedPassword.getValue(),
+            AuthorityUtils.createAuthorityList(netUserRole.getValue()));
+    }
 
-  public UsernamePasswordAuthenticationToken getUsernamePasswordAuthenticationToken() {
-    return new UsernamePasswordAuthenticationToken(
+    public UsernamePasswordAuthenticationToken getUsernamePasswordAuthenticationToken() {
+        return new UsernamePasswordAuthenticationToken(
             netUserId.getValue(),
             null,
             AuthorityUtils.createAuthorityList(netUserRole.getValue())
-    );
-  }
+        );
+    }
 }

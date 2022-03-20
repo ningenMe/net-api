@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ningenme.net.api.domain.entity.Comic;
 import ningenme.net.api.domain.value.Isbn13;
-import ningenme.net.api.infrastructure.mysql.ComicMysqlRepository;
+import ningenme.net.api.infrastructure.comicmeMysql.ComicMysqlRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

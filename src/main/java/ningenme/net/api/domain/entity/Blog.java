@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import ningenme.net.api.domain.value.*;
-import ningenme.net.api.infrastructure.mysql.dto.BlogDto;
+import ningenme.net.api.infrastructure.ningenmeMysql.dto.BlogDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,18 +25,6 @@ public class Blog {
     @NonNull
     @Builder.Default
     private final Liked liked = Liked.of();
-
-    private BlogDto getBlogDto() {
-        BlogDto blogDto = new BlogDto();
-        {
-            blogDto.setBlogType(blogType.getValue());
-            blogDto.setBlogTitle(blogTitle.getValue());
-            blogDto.setPostedDate(postedDate.getValue());
-            blogDto.setUrl(url.getValue());
-            blogDto.setLiked(liked.getValue());
-        }
-        return blogDto;
-    }
 
     public static Blog of(@NonNull final BlogDto blogDto) {
         return Blog.builder()
@@ -58,6 +46,18 @@ public class Blog {
         return blogDtoList.stream()
             .map(Blog::of)
             .collect(Collectors.toList());
+    }
+
+    private BlogDto getBlogDto() {
+        BlogDto blogDto = new BlogDto();
+        {
+            blogDto.setBlogType(blogType.getValue());
+            blogDto.setBlogTitle(blogTitle.getValue());
+            blogDto.setPostedDate(postedDate.getValue());
+            blogDto.setUrl(url.getValue());
+            blogDto.setLiked(liked.getValue());
+        }
+        return blogDto;
     }
 
     public PostedMonth getPostedMonth() {

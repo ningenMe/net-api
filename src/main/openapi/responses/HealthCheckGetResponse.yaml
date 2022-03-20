@@ -1,5 +1,9 @@
 type: object
-required: [dateCountList]
+required: [ dateCountList ]
 properties:
-  mysql:
+  ningenmeMysql:
+    type: boolean
+  comicmeMysql:
+    type: boolean
+  comproMysql:
     type: boolean

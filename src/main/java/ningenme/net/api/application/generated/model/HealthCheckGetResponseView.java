@@ -19,27 +19,73 @@ import java.util.*;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 public class HealthCheckGetResponseView   {
-  @JsonProperty("mysql")
-  private Boolean mysql;
+  @JsonProperty("ningenmeMysql")
+  private Boolean ningenmeMysql;
 
-  public HealthCheckGetResponseView mysql(Boolean mysql) {
-    this.mysql = mysql;
+  @JsonProperty("comicmeMysql")
+  private Boolean comicmeMysql;
+
+  @JsonProperty("comproMysql")
+  private Boolean comproMysql;
+
+  public HealthCheckGetResponseView ningenmeMysql(Boolean ningenmeMysql) {
+    this.ningenmeMysql = ningenmeMysql;
     return this;
   }
 
   /**
-   * Get mysql
-   * @return mysql
+   * Get ningenmeMysql
+   * @return ningenmeMysql
   */
   @ApiModelProperty(value = "")
 
 
-  public Boolean getMysql() {
-    return mysql;
+  public Boolean getNingenmeMysql() {
+    return ningenmeMysql;
   }
 
-  public void setMysql(Boolean mysql) {
-    this.mysql = mysql;
+  public void setNingenmeMysql(Boolean ningenmeMysql) {
+    this.ningenmeMysql = ningenmeMysql;
+  }
+
+  public HealthCheckGetResponseView comicmeMysql(Boolean comicmeMysql) {
+    this.comicmeMysql = comicmeMysql;
+    return this;
+  }
+
+  /**
+   * Get comicmeMysql
+   * @return comicmeMysql
+  */
+  @ApiModelProperty(value = "")
+
+
+  public Boolean getComicmeMysql() {
+    return comicmeMysql;
+  }
+
+  public void setComicmeMysql(Boolean comicmeMysql) {
+    this.comicmeMysql = comicmeMysql;
+  }
+
+  public HealthCheckGetResponseView comproMysql(Boolean comproMysql) {
+    this.comproMysql = comproMysql;
+    return this;
+  }
+
+  /**
+   * Get comproMysql
+   * @return comproMysql
+  */
+  @ApiModelProperty(value = "")
+
+
+  public Boolean getComproMysql() {
+    return comproMysql;
+  }
+
+  public void setComproMysql(Boolean comproMysql) {
+    this.comproMysql = comproMysql;
   }
 
 
@@ -52,12 +98,14 @@ public class HealthCheckGetResponseView   {
       return false;
     }
     HealthCheckGetResponseView healthCheckGetResponse = (HealthCheckGetResponseView) o;
-    return Objects.equals(this.mysql, healthCheckGetResponse.mysql);
+    return Objects.equals(this.ningenmeMysql, healthCheckGetResponse.ningenmeMysql) &&
+        Objects.equals(this.comicmeMysql, healthCheckGetResponse.comicmeMysql) &&
+        Objects.equals(this.comproMysql, healthCheckGetResponse.comproMysql);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(mysql);
+    return Objects.hash(ningenmeMysql, comicmeMysql, comproMysql);
   }
 
   @Override
@@ -65,7 +113,9 @@ public class HealthCheckGetResponseView   {
     StringBuilder sb = new StringBuilder();
     sb.append("class HealthCheckGetResponseView {\n");
     
-    sb.append("    mysql: ").append(toIndentedString(mysql)).append("\n");
+    sb.append("    ningenmeMysql: ").append(toIndentedString(ningenmeMysql)).append("\n");
+    sb.append("    comicmeMysql: ").append(toIndentedString(comicmeMysql)).append("\n");
+    sb.append("    comproMysql: ").append(toIndentedString(comproMysql)).append("\n");
     sb.append("}");
     return sb.toString();
   }
