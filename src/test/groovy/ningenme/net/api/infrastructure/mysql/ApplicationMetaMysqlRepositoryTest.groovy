@@ -5,7 +5,6 @@ import ningenme.net.api.domain.value.ApplicationMetaId
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
-import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -15,7 +14,6 @@ import java.sql.ResultSet
 import java.sql.Statement
 
 @SpringBootTest
-@Ignore
 class ApplicationMetaMysqlRepositoryTest extends Specification {
 
     @Autowired
