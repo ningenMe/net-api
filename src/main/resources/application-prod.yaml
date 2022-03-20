@@ -1,17 +1,17 @@
 spring:
   datasource:
     ningenme-mysql:
-      url: ${NINGENME_MYSQL_URL}/ningenme
+      url: ${NINGENME_MYSQL_URL}/ningenme?enabledTLSProtocols=TLSv1.2
       username: ${NINGENME_MYSQL_MASTER_USER_USERNAME}
       password: ${NINGENME_MYSQL_MASTER_USER_PASSWORD}
       driver-class-name: com.mysql.cj.jdbc.Driver
     comicme-mysql:
-      url: ${NINGENME_MYSQL_URL}/comicme
+      url: ${NINGENME_MYSQL_URL}/comicme?enabledTLSProtocols=TLSv1.2
       username: ${NINGENME_MYSQL_MASTER_USER_USERNAME}
       password: ${NINGENME_MYSQL_MASTER_USER_PASSWORD}
       driver-class-name: com.mysql.cj.jdbc.Driver
     compro-mysql:
-      url: ${NINGENME_MYSQL_URL}/compro
+      url: ${NINGENME_MYSQL_URL}/compro?enabledTLSProtocols=TLSv1.2
       username: ${NINGENME_MYSQL_MASTER_USER_USERNAME}
       password: ${NINGENME_MYSQL_MASTER_USER_PASSWORD}
       driver-class-name: com.mysql.cj.jdbc.Driver
