@@ -41,9 +41,18 @@ public class NingenmeMysqlConfig {
     }
 
     @Bean(name = SQL_SESSION_FACTORY)
-    public SqlSessionFactory sqlSessionFactory(@Qualifier(DATA_SOURCE) DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-        sqlSessionFactory.setDataSource(dataSource);
-        return sqlSessionFactory.getObject();
+    public SqlSessionFactory sqlSessionFactory(
+        @Qualifier(DATA_SOURCE) DataSource dataSource) throws Exception {
+
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSource);
+
+        {
+            org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+            configuration.setMapUnderscoreToCamelCase(true);
+            sqlSessionFactoryBean.setConfiguration(configuration);
+        }
+
+        return sqlSessionFactoryBean.getObject();
     }
 }

@@ -12,7 +12,6 @@ import org.dbunit.operation.DatabaseOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.jdbc.core.JdbcTemplate
-import spock.lang.Ignore
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -20,7 +19,6 @@ import spock.lang.Unroll
 import static org.dbunit.Assertion.assertEquals
 
 @SpringBootTest
-@Ignore
 class BlogMysqlRepositoryTest extends Specification {
 
     private final static String FILE_PATH = "src/test/groovy/ningenme/net/api/infrastructure/mysql/blogs"
